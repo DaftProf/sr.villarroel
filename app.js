@@ -291,10 +291,6 @@
   if (L.kahoot) ext += '<a href="' + esc(L.kahoot) + '" target="_blank" rel="noopener">🟣 Kahoot</a>';
   document.getElementById("liens-externes").innerHTML = ext;
   majDeconnexion();
-  window.addEventListener("hashchange", function () {
-    afficher();
-    // Compte aussi chaque page consultée dans le site (niveau, séquence, étapa…)
-    try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: location.pathname + location.hash, title: document.title + " — " + (document.querySelector("h1") || {}).textContent }); } catch (e) {}
-  });
+  window.addEventListener("hashchange", afficher);
   afficher();
 })();

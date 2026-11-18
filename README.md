@@ -61,9 +61,3 @@ Pour changer un code : ouvrir `https://daftprof.github.io/sr.villarroel/changer-
 L'appareil retient le code : l'élève ne le tape qu'une fois. Le bouton « 🔒 Verrouiller les niveaux » en bas de page l'efface (utile sur le TBI ou un iPad partagé).
 
 ℹ️ Le code est un portillon, pas un coffre-fort : il empêche d'entrer par hasard, mais avec un dépôt GitHub public, une personne qui fouille le dépôt peut trouver les PDF. Ne rien mettre de confidentiel (notes, corrigés d'évaluation…).
-
-## 📊 6. Voir le nombre de visites
-
-Les visites sont comptées par **GoatCounter** (gratuit, sans cookie, sans publicité).
-Tableau de bord : **https://sr-villarroel.goatcounter.com** (se connecter avec le compte GoatCounter).
-On y voit le nombre de visiteurs par jour, les pages les plus consultées (niveaux, séquences, étapas), les appareils utilisés (iPad, téléphone, ordinateur).
