@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>🔑 Changer un code</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .boite { max-width: 640px; margin: 30px auto; background: #fff; border-radius: 20px; padding: 24px; box-shadow: var(--ombre); }
+    input { width: 100%; font: inherit; font-size: 1.2rem; padding: 10px 14px; border: 3px solid #ddd; border-radius: 12px; }
+    code { display: block; background: #2B2D42; color: #FFC300; padding: 12px; border-radius: 10px; word-break: break-all; margin: 10px 0; font-size: .95rem; }
+    ol li { margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+  <div class="boite">
+    <h1>🔑 Changer un code d'accès</h1>
+    <p>Tape le nouveau code (les majuscules et les espaces au début/à la fin ne comptent pas).</p>
+    <input id="code" type="text" placeholder="ex. tortilla2027" autocapitalize="off" autocorrect="off" spellcheck="false">
+    <p><strong>Empreinte à copier :</strong></p>
+    <code id="resultat">—</code>
+    <button class="btn" id="copier">📋 Copier</button>
+    <h2>Ensuite</h2>
+    <ol>
+      <li>Ouvre <strong>contenu.js</strong> sur GitHub (icône ✏️ pour modifier).</li>
+      <li>Trouve le niveau voulu et remplace ce qu'il y a entre les guillemets après <strong>code:</strong> (ou <strong>codeProf:</strong> pour ton code professeur).</li>
+      <li>Mets à jour le petit commentaire à droite (<em>// tortilla2027</em>) pour t'en souvenir.</li>
+      <li>Clique sur <strong>Commit changes</strong>. Le nouveau code marche après 1 à 2 minutes.</li>
+    </ol>
+    <p><a href="index.html">← Retour au site</a></p>
+  </div>
+  <script src="sha256.js"></script>
+  <script>
+    var champ = document.getElementById("code"), res = document.getElementById("resultat");
+    champ.oninput = function () { res.textContent = champ.value.trim() ? empreinteCode(champ.value) : "—"; };
+    document.getElementById("copier").onclick = function () {
+      var t = res.textContent; if (t === "—") return;
+      if (navigator.clipboard) navigator.clipboard.writeText(t).then(function () { document.getElementById("copier").textContent = "✅ Copié !"; });
+      else { var r = document.createRange(); r.selectNode(res); getSelection().removeAllRanges(); getSelection().addRange(r); }
+    };
+  </script>
+</body>
+</html>

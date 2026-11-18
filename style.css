@@ -1,0 +1,153 @@
+/* Apparence du site — modifiable, mais pas nécessaire au quotidien */
+:root {
+  --fond: #FFF8EC;
+  --texte: #2B2D42;
+  --doux: #6B6F80;
+  --carte: #FFFFFF;
+  --jaune: #FFC300;
+  --rouge: #E63946;
+  --ombre: 0 4px 0 rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.06);
+  --rayon: 20px;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--fond); color: var(--texte);
+  font-family: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 17px; line-height: 1.5;
+  min-height: 100vh; display: flex; flex-direction: column;
+}
+h1, h2, h3 { font-family: "Baloo 2", "Nunito", system-ui, sans-serif; line-height: 1.15; margin: 0 0 .4em; }
+h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+h2 { font-size: 1.5rem; margin-top: 1.4em; }
+a { color: inherit; }
+button { font: inherit; cursor: pointer; }
+
+/* En-tête */
+.entete {
+  background: linear-gradient(100deg, var(--rouge) 0%, #F4722B 55%, var(--jaune) 100%);
+  color: #fff; padding: 14px max(20px, env(safe-area-inset-left));
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
+}
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-emoji { font-size: 2.4rem; }
+.logo-titre { display: block; font-family: "Baloo 2", sans-serif; font-weight: 800; font-size: 1.6rem; line-height: 1; }
+.logo-sous { display: block; font-size: .9rem; opacity: .95; }
+.liens-externes { display: flex; flex-wrap: wrap; gap: 8px; }
+.liens-externes a {
+  background: rgba(255,255,255,.22); border: 2px solid rgba(255,255,255,.5);
+  padding: 6px 12px; border-radius: 999px; text-decoration: none; font-weight: 700; font-size: .9rem;
+}
+.liens-externes a:hover { background: rgba(255,255,255,.35); }
+
+/* Fil d'Ariane */
+.fil { padding: 10px 20px 0; max-width: 1100px; width: 100%; margin: 0 auto; font-size: .95rem; color: var(--doux); }
+.fil a { text-decoration: none; font-weight: 700; color: var(--texte); }
+.fil a:hover { text-decoration: underline; }
+.fil .sep { margin: 0 6px; }
+
+.contenu { flex: 1; padding: 16px 20px 40px; max-width: 1100px; width: 100%; margin: 0 auto; }
+.intro { color: var(--doux); margin-top: -.2em; }
+
+/* Grilles de tuiles */
+.grille { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); margin-top: 12px; }
+.tuile {
+  background: var(--carte); border-radius: var(--rayon); box-shadow: var(--ombre);
+  padding: 18px; text-decoration: none; display: flex; flex-direction: column; gap: 4px;
+  border-top: 8px solid var(--c, var(--jaune)); transition: transform .12s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.tuile:hover, .tuile:focus-visible { transform: translateY(-3px); }
+.tuile:active { transform: translateY(1px); }
+.tuile .emoji { font-size: 2.4rem; line-height: 1.1; }
+.tuile .titre { font-family: "Baloo 2", sans-serif; font-weight: 800; font-size: 1.3rem; }
+.tuile .sous { color: var(--doux); font-size: .95rem; }
+.tuile .badge { align-self: flex-start; margin-top: 6px; font-size: .8rem; font-weight: 800; padding: 2px 10px; border-radius: 999px; background: #f1f1f4; }
+.tuile.grande .emoji { font-size: 3rem; }
+.tuile.grande .titre { font-size: 1.6rem; }
+
+/* Bandeau d'accueil */
+.bandeau {
+  background: var(--carte); border-radius: var(--rayon); box-shadow: var(--ombre);
+  padding: 20px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+}
+.bandeau .gros { font-size: 3rem; }
+.bandeau > div { flex: 1 1 260px; }
+
+/* Puces de filtre + recherche */
+.filtres { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 8px 0; }
+.puce {
+  border: 2px solid #ddd; background: #fff; border-radius: 999px; padding: 6px 14px; font-weight: 800; font-size: .9rem;
+}
+.puce.active { background: var(--texte); color: #fff; border-color: var(--texte); }
+.recherche {
+  flex: 1 1 200px; min-width: 0; border: 2px solid #ddd; border-radius: 999px; padding: 8px 16px; font: inherit; background: #fff;
+}
+
+/* Étapa : ressources */
+.ressources { display: grid; gap: 12px; margin-top: 12px; }
+.ressource {
+  display: flex; align-items: center; gap: 14px; background: var(--carte); border-radius: 16px;
+  box-shadow: var(--ombre); padding: 14px 16px; text-decoration: none; border-left: 8px solid var(--c, #ccc);
+}
+.ressource .emoji { font-size: 2rem; width: 2.4rem; text-align: center; flex: none; }
+.ressource .titre { font-weight: 800; }
+.ressource .type { color: var(--doux); font-size: .85rem; }
+.ressource .fleche { margin-left: auto; font-size: 1.3rem; color: var(--doux); }
+.ressource.inactive { opacity: .55; box-shadow: none; border-style: dashed; border-width: 2px 2px 2px 8px; border-color: #ccc; }
+.ressource-video { background: var(--carte); border-radius: 16px; box-shadow: var(--ombre); padding: 14px 16px; border-left: 8px solid var(--c, #ccc); }
+.ressource-video .entete-res { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+.video { position: relative; width: 100%; padding-top: 56.25%; border-radius: 12px; overflow: hidden; background: #000; }
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* Liste des étapas */
+.etapas { display: grid; gap: 12px; margin-top: 12px; }
+.etapa {
+  display: flex; align-items: center; gap: 16px; background: var(--carte); border-radius: 16px; box-shadow: var(--ombre);
+  padding: 14px 18px; text-decoration: none;
+}
+.etapa .num {
+  flex: none; width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--c); color: #fff; font-family: "Baloo 2", sans-serif; font-weight: 800; font-size: 1.4rem;
+}
+.etapa .titre { font-weight: 800; font-size: 1.15rem; }
+.etapa .sous { color: var(--doux); font-size: .95rem; }
+.etapa .nb { margin-left: auto; color: var(--doux); font-size: .9rem; white-space: nowrap; }
+
+/* Cadenas */
+.cadenas {
+  max-width: 440px; margin: 30px auto; background: var(--carte); border-radius: var(--rayon); box-shadow: var(--ombre);
+  padding: 28px; text-align: center; border-top: 10px solid var(--c, var(--jaune));
+}
+.cadenas .gros { font-size: 3.5rem; }
+.cadenas input {
+  width: 100%; font: inherit; font-size: 1.3rem; text-align: center; padding: 12px; border-radius: 14px;
+  border: 3px solid #ddd; margin: 12px 0; letter-spacing: .05em;
+}
+.cadenas input:focus { outline: none; border-color: var(--c, var(--jaune)); }
+.btn {
+  background: var(--c, var(--rouge)); color: #fff; border: 0; border-radius: 14px; padding: 12px 22px;
+  font-weight: 800; font-size: 1.1rem; box-shadow: 0 4px 0 rgba(0,0,0,.18);
+}
+.btn:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,.18); }
+.erreur { color: var(--rouge); font-weight: 800; min-height: 1.5em; margin-top: 10px; }
+.secoue { animation: secoue .4s; }
+@keyframes secoue { 25% { transform: translateX(-8px); } 50% { transform: translateX(8px); } 75% { transform: translateX(-4px); } }
+
+.vide { color: var(--doux); font-style: italic; padding: 12px 0; }
+.titre-page { display: flex; align-items: center; gap: 14px; margin-top: 8px; }
+.titre-page .gros { font-size: 3rem; }
+.titre-page p { margin: 0; color: var(--doux); }
+
+.pied { text-align: center; color: var(--doux); padding: 20px; font-size: .9rem; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-lien { background: none; border: 0; color: var(--doux); text-decoration: underline; padding: 0; }
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .grille { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .tuile { padding: 14px; }
+  .tuile .emoji { font-size: 2rem; }
+  .tuile .titre { font-size: 1.1rem; }
+  .etapa .nb { display: none; }
+}
+@media print { .entete, .pied, .fil { display: none; } }
