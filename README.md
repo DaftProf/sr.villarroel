@@ -46,18 +46,9 @@ Pour une nouvelle notion, copier un bloc `{ id: "…", … },` entier et le modi
 
 ## 🔑 5. Les codes d'accès
 
-Codes de départ (à changer avant de les donner aux élèves) :
+Les codes ne sont **pas écrits** dans ce dépôt (il est public) : seule leur « empreinte » figure dans `contenu.js`. Garder la liste des codes de son côté.
 
-| Niveau | Code |
-|---|---|
-| 5ème | `cinco2026` |
-| 4ème | `cuatro2026` |
-| 1ère | `uno2026` |
-| Terminale | `tle2026` |
-| Bachelor | `bachelor2026` |
-| **Professeur (tous les niveaux)** | `profe-chris` |
-
-Pour changer un code : ouvrir `https://daftprof.github.io/sr.villarroel/changer-code.html`, taper le nouveau code, copier l'empreinte et la coller dans `contenu.js`.
+Pour changer un code : ouvrir `https://daftprof.github.io/sr.villarroel/changer-code.html`, taper le nouveau code, copier l'empreinte et la coller dans `contenu.js` (sans écrire le code en clair à côté).
 L'appareil retient le code : l'élève ne le tape qu'une fois. Le bouton « 🔒 Verrouiller les niveaux » en bas de page l'efface (utile sur le TBI ou un iPad partagé).
 
 ℹ️ Le code est un portillon, pas un coffre-fort : il empêche d'entrer par hasard, mais avec un dépôt GitHub public, une personne qui fouille le dépôt peut trouver les PDF. Ne rien mettre de confidentiel (notes, corrigés d'évaluation…).

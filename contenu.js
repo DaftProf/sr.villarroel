@@ -16,8 +16,8 @@ var SITE = {
     kahoot: ""            // lien de votre page Kahoot
   },
   // Empreinte du code professeur (ouvre tous les niveaux).
-  // Pour la changer : ouvrir changer-code.html. Code de départ : profe-chris
-  codeProf: "a0b9e8fb42ea3a052cea00b2cf439873d946c365873d3660360db737373f3356"
+  // Pour la changer : ouvrir changer-code.html.
+  codeProf: "6dbe00cf06c8affce8c398eae3a5ad7bce9d2d7d320b642c73172532f58f624e"
 };
 
 /* ---------------------------------------------------------------------
@@ -62,7 +62,7 @@ var GRAMMAIRE = [
 var NIVEAUX = [
   {
     id: "5", dossier: "5-Cinquieme", nom: "5ème", emoji: "🌱", couleur: "#FF8A00",
-    code: "f46fb2d7b6fdacedd0de5d3cbd7ad5a564b0077a4f6fa6012d17c16c30fb4b07", // cinco2026
+    code: "761b6f9abfc68d5fba2894b0ee4ba67842f9ed241240edbf16a271875cd1ed26",
     sequences: [
       { id: "5-S1", emoji: "👋", titre: "Séquence 1", sousTitre: "Titre à compléter", notions: ["presente"],
         etapas: [
@@ -75,7 +75,7 @@ var NIVEAUX = [
   },
   {
     id: "4", dossier: "4-Quatrieme", nom: "4ème", emoji: "🚀", couleur: "#E63946",
-    code: "14e3b7e202052c9fb15ee35a77a9fd97c409b42451b5d8c10f8b2e0388f7443b", // cuatro2026
+    code: "3f6754e4e9feeb89483e9e5e199ac09490123d3909dee3faa7a32d44ee42e889",
     sequences: [
       { id: "4-S1", emoji: "🗺️", titre: "Séquence 1", sousTitre: "Exemple complet à remplacer", notions: ["preterito", "ser-estar"],
         etapas: [
@@ -106,7 +106,7 @@ var NIVEAUX = [
   },
   {
     id: "1", dossier: "1-Premiere", nom: "1ère", emoji: "🎓", couleur: "#2A9D8F",
-    code: "62f7d1a18f4bf2185a0b6bdb0c24b73bb436bcd959beb86cd3dcc11df7e63306", // uno2026
+    code: "0ef7e5043d737499ff9ea8e0075a44784f53ff438cda37a24256c3457d8a5318",
     sequences: [
       { id: "1-S1", emoji: "📘", titre: "Séquence 1", sousTitre: "Titre à compléter", notions: [],
         etapas: [ { titre: "Etapa 1", sousTitre: "", ressources: [ { type: "fiche", titre: "Fiche de l'étapa", lien: "" } ] } ] }
@@ -114,7 +114,7 @@ var NIVEAUX = [
   },
   {
     id: "0", dossier: "0-Terminale", nom: "Terminale", emoji: "🏅", couleur: "#6A4C93",
-    code: "abeab405ec7459ddafbc80bec99a5a1d042503c61c60f80dfaddcbb3ac23512b", // tle2026
+    code: "b56241358f9b0470942bff4a226a9d84f958f458302f8f7f2c2277d5dcfbddbf",
     sequences: [
       { id: "T-S1", emoji: "📗", titre: "Séquence 1", sousTitre: "Titre à compléter", notions: [],
         etapas: [ { titre: "Etapa 1", sousTitre: "", ressources: [ { type: "fiche", titre: "Fiche de l'étapa", lien: "" } ] } ] }
@@ -122,7 +122,7 @@ var NIVEAUX = [
   },
   {
     id: "B", dossier: "Bachelor", nom: "Bachelor", emoji: "💼", couleur: "#1D3557",
-    code: "ad72e4c45c1716f12eb5bdf3e2b1ac37c9a13167f3b7624b76ad578476547b44", // bachelor2026
+    code: "b77de3c8f3aa60df68747cbba94ab1854019a33f1577eaf326b051705116c1af",
     sequences: [
       { id: "B-S1", emoji: "🤝", titre: "Module 1", sousTitre: "Négociation commerciale", notions: [],
         etapas: [ { titre: "Sesión 1", sousTitre: "", ressources: [ { type: "fiche", titre: "Support de cours", lien: "" } ] } ] }
