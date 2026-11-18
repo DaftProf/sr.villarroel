@@ -40,6 +40,12 @@ button { font: inherit; cursor: pointer; }
 }
 .liens-externes a:hover { background: rgba(255,255,255,.35); }
 
+/* Bandeau des drapeaux hispanophones */
+.banderas { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; padding: 10px 14px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+.banderas img { height: 24px; width: auto; border-radius: 4px; box-shadow: 0 0 0 1px rgba(0,0,0,.12); transition: transform .12s ease; }
+.banderas img:hover { transform: scale(1.25); }
+@media (max-width: 560px) { .banderas { gap: 5px; padding: 8px; } .banderas img { height: 17px; } }
+
 /* Fil d'Ariane */
 .fil { padding: 10px 20px 0; max-width: 1100px; width: 100%; margin: 0 auto; font-size: .95rem; color: var(--doux); }
 .fil a { text-decoration: none; font-weight: 700; color: var(--texte); }
