@@ -70,7 +70,36 @@ var NIVEAUX = [
             { type: "fiche", titre: "Fiche de l'étapa", lien: "" },
             { type: "flashcards", titre: "Flashcards du vocabulaire", lien: "" }
           ]}
-        ]}
+        ]},
+      { id: "5-S2", emoji: "2️⃣", titre: "Séquence 2", sousTitre: "Titre à compléter", notions: [],
+        etapas: [
+          { titre: "Etapa 1", sousTitre: "Découverte du vocabulaire", ressources: [
+            { type: "fiche", titre: "Fiche de l'étapa 1", lien: "" },
+            { type: "vocabulaire", titre: "Tableau de vocabulaire", lien: "" },
+            { type: "flashcards", titre: "Flashcards sonores — vocabulaire", lien: "" }
+          ]},
+          { titre: "Etapa 2", sousTitre: "Compréhension orale", ressources: [
+            { type: "co", titre: "Vidéo à regarder à la maison", lien: "" },
+            { type: "fiche", titre: "Fiche de compréhension", lien: "" }
+          ]},
+          { titre: "Etapa 3", sousTitre: "Grammaire", ressources: [
+            { type: "grammaire", titre: "Fiche de grammaire", lien: "" },
+            { type: "flashcards", titre: "Flashcards sonores — conjugaison", lien: "" },
+            { type: "jeu", titre: "Jeu en ligne", lien: "" },
+            { type: "kahoot", titre: "Kahoot de révision", lien: "" }
+          ]},
+          { titre: "Etapa 4", sousTitre: "Conversación", ressources: [
+            { type: "fiche", titre: "Fiche de la conversación", lien: "" }
+          ]},
+          { titre: "Proyecto final", emoji: "🏆", sousTitre: "Évaluation de fin de séquence", ressources: [
+            { type: "projet", titre: "Consigne du projet", lien: "" },
+            { type: "evaluation", titre: "Grille d'évaluation", lien: "" }
+          ]}
+        ]},
+      { id: "5-S3", emoji: "3️⃣", titre: "Séquence 3", sousTitre: "Titre à compléter", notions: [], etapas: [] },
+      { id: "5-S4", emoji: "4️⃣", titre: "Séquence 4", sousTitre: "Titre à compléter", notions: [], etapas: [] },
+      { id: "5-S5", emoji: "5️⃣", titre: "Séquence 5", sousTitre: "Titre à compléter", notions: [], etapas: [] },
+      { id: "5-S6", emoji: "6️⃣", titre: "Séquence 6", sousTitre: "Titre à compléter", notions: [], etapas: [] }
     ]
   },
   {
@@ -101,7 +130,36 @@ var NIVEAUX = [
             { type: "projet", titre: "Consigne du projet", lien: "" },
             { type: "evaluation", titre: "Grille d'évaluation", lien: "" }
           ]}
-        ]}
+        ]},
+      { id: "4-S2", emoji: "2️⃣", titre: "Séquence 2", sousTitre: "Titre à compléter", notions: [],
+        etapas: [
+          { titre: "Etapa 1", sousTitre: "Découverte du vocabulaire", ressources: [
+            { type: "fiche", titre: "Fiche de l'étapa 1", lien: "" },
+            { type: "vocabulaire", titre: "Tableau de vocabulaire", lien: "" },
+            { type: "flashcards", titre: "Flashcards sonores — vocabulaire", lien: "" }
+          ]},
+          { titre: "Etapa 2", sousTitre: "Compréhension orale", ressources: [
+            { type: "co", titre: "Vidéo à regarder à la maison", lien: "" },
+            { type: "fiche", titre: "Fiche de compréhension", lien: "" }
+          ]},
+          { titre: "Etapa 3", sousTitre: "Grammaire", ressources: [
+            { type: "grammaire", titre: "Fiche de grammaire", lien: "" },
+            { type: "flashcards", titre: "Flashcards sonores — conjugaison", lien: "" },
+            { type: "jeu", titre: "Jeu en ligne", lien: "" },
+            { type: "kahoot", titre: "Kahoot de révision", lien: "" }
+          ]},
+          { titre: "Etapa 4", sousTitre: "Conversación", ressources: [
+            { type: "fiche", titre: "Fiche de la conversación", lien: "" }
+          ]},
+          { titre: "Proyecto final", emoji: "🏆", sousTitre: "Évaluation de fin de séquence", ressources: [
+            { type: "projet", titre: "Consigne du projet", lien: "" },
+            { type: "evaluation", titre: "Grille d'évaluation", lien: "" }
+          ]}
+        ]},
+      { id: "4-S3", emoji: "3️⃣", titre: "Séquence 3", sousTitre: "Titre à compléter", notions: [], etapas: [] },
+      { id: "4-S4", emoji: "4️⃣", titre: "Séquence 4", sousTitre: "Titre à compléter", notions: [], etapas: [] },
+      { id: "4-S5", emoji: "5️⃣", titre: "Séquence 5", sousTitre: "Titre à compléter", notions: [], etapas: [] },
+      { id: "4-S6", emoji: "6️⃣", titre: "Séquence 6", sousTitre: "Titre à compléter", notions: [], etapas: [] }
     ]
   },
   {
@@ -109,7 +167,36 @@ var NIVEAUX = [
     code: "0ef7e5043d737499ff9ea8e0075a44784f53ff438cda37a24256c3457d8a5318",
     sequences: [
       { id: "1-S1", emoji: "📘", titre: "Séquence 1", sousTitre: "Titre à compléter", notions: [],
-        etapas: [ { titre: "Etapa 1", sousTitre: "", ressources: [ { type: "fiche", titre: "Fiche de l'étapa", lien: "" } ] } ] }
+        etapas: [ { titre: "Etapa 1", sousTitre: "", ressources: [ { type: "fiche", titre: "Fiche de l'étapa", lien: "" } ] } ] },
+      { id: "1-S2", emoji: "2️⃣", titre: "Séquence 2", sousTitre: "Titre à compléter", notions: [],
+        etapas: [
+          { titre: "Etapa 1", sousTitre: "Découverte du vocabulaire", ressources: [
+            { type: "fiche", titre: "Fiche de l'étapa 1", lien: "" },
+            { type: "vocabulaire", titre: "Tableau de vocabulaire", lien: "" },
+            { type: "flashcards", titre: "Flashcards sonores — vocabulaire", lien: "" }
+          ]},
+          { titre: "Etapa 2", sousTitre: "Compréhension orale", ressources: [
+            { type: "co", titre: "Vidéo à regarder à la maison", lien: "" },
+            { type: "fiche", titre: "Fiche de compréhension", lien: "" }
+          ]},
+          { titre: "Etapa 3", sousTitre: "Grammaire", ressources: [
+            { type: "grammaire", titre: "Fiche de grammaire", lien: "" },
+            { type: "flashcards", titre: "Flashcards sonores — conjugaison", lien: "" },
+            { type: "jeu", titre: "Jeu en ligne", lien: "" },
+            { type: "kahoot", titre: "Kahoot de révision", lien: "" }
+          ]},
+          { titre: "Etapa 4", sousTitre: "Conversación", ressources: [
+            { type: "fiche", titre: "Fiche de la conversación", lien: "" }
+          ]},
+          { titre: "Proyecto final", emoji: "🏆", sousTitre: "Évaluation de fin de séquence", ressources: [
+            { type: "projet", titre: "Consigne du projet", lien: "" },
+            { type: "evaluation", titre: "Grille d'évaluation", lien: "" }
+          ]}
+        ]},
+      { id: "1-S3", emoji: "3️⃣", titre: "Séquence 3", sousTitre: "Titre à compléter", notions: [], etapas: [] },
+      { id: "1-S4", emoji: "4️⃣", titre: "Séquence 4", sousTitre: "Titre à compléter", notions: [], etapas: [] },
+      { id: "1-S5", emoji: "5️⃣", titre: "Séquence 5", sousTitre: "Titre à compléter", notions: [], etapas: [] },
+      { id: "1-S6", emoji: "6️⃣", titre: "Séquence 6", sousTitre: "Titre à compléter", notions: [], etapas: [] }
     ]
   },
   {
@@ -117,7 +204,36 @@ var NIVEAUX = [
     code: "b56241358f9b0470942bff4a226a9d84f958f458302f8f7f2c2277d5dcfbddbf",
     sequences: [
       { id: "T-S1", emoji: "📗", titre: "Séquence 1", sousTitre: "Titre à compléter", notions: [],
-        etapas: [ { titre: "Etapa 1", sousTitre: "", ressources: [ { type: "fiche", titre: "Fiche de l'étapa", lien: "" } ] } ] }
+        etapas: [ { titre: "Etapa 1", sousTitre: "", ressources: [ { type: "fiche", titre: "Fiche de l'étapa", lien: "" } ] } ] },
+      { id: "T-S2", emoji: "2️⃣", titre: "Séquence 2", sousTitre: "Titre à compléter", notions: [],
+        etapas: [
+          { titre: "Etapa 1", sousTitre: "Découverte du vocabulaire", ressources: [
+            { type: "fiche", titre: "Fiche de l'étapa 1", lien: "" },
+            { type: "vocabulaire", titre: "Tableau de vocabulaire", lien: "" },
+            { type: "flashcards", titre: "Flashcards sonores — vocabulaire", lien: "" }
+          ]},
+          { titre: "Etapa 2", sousTitre: "Compréhension orale", ressources: [
+            { type: "co", titre: "Vidéo à regarder à la maison", lien: "" },
+            { type: "fiche", titre: "Fiche de compréhension", lien: "" }
+          ]},
+          { titre: "Etapa 3", sousTitre: "Grammaire", ressources: [
+            { type: "grammaire", titre: "Fiche de grammaire", lien: "" },
+            { type: "flashcards", titre: "Flashcards sonores — conjugaison", lien: "" },
+            { type: "jeu", titre: "Jeu en ligne", lien: "" },
+            { type: "kahoot", titre: "Kahoot de révision", lien: "" }
+          ]},
+          { titre: "Etapa 4", sousTitre: "Conversación", ressources: [
+            { type: "fiche", titre: "Fiche de la conversación", lien: "" }
+          ]},
+          { titre: "Proyecto final", emoji: "🏆", sousTitre: "Évaluation de fin de séquence", ressources: [
+            { type: "projet", titre: "Consigne du projet", lien: "" },
+            { type: "evaluation", titre: "Grille d'évaluation", lien: "" }
+          ]}
+        ]},
+      { id: "T-S3", emoji: "3️⃣", titre: "Séquence 3", sousTitre: "Titre à compléter", notions: [], etapas: [] },
+      { id: "T-S4", emoji: "4️⃣", titre: "Séquence 4", sousTitre: "Titre à compléter", notions: [], etapas: [] },
+      { id: "T-S5", emoji: "5️⃣", titre: "Séquence 5", sousTitre: "Titre à compléter", notions: [], etapas: [] },
+      { id: "T-S6", emoji: "6️⃣", titre: "Séquence 6", sousTitre: "Titre à compléter", notions: [], etapas: [] }
     ]
   },
   {
@@ -125,7 +241,36 @@ var NIVEAUX = [
     code: "b77de3c8f3aa60df68747cbba94ab1854019a33f1577eaf326b051705116c1af",
     sequences: [
       { id: "B-S1", emoji: "🤝", titre: "Module 1", sousTitre: "Négociation commerciale", notions: [],
-        etapas: [ { titre: "Sesión 1", sousTitre: "", ressources: [ { type: "fiche", titre: "Support de cours", lien: "" } ] } ] }
+        etapas: [ { titre: "Sesión 1", sousTitre: "", ressources: [ { type: "fiche", titre: "Support de cours", lien: "" } ] } ] },
+      { id: "B-S2", emoji: "2️⃣", titre: "Module 2", sousTitre: "Titre à compléter", notions: [],
+        etapas: [
+          { titre: "Etapa 1", sousTitre: "Découverte du vocabulaire", ressources: [
+            { type: "fiche", titre: "Fiche de l'étapa 1", lien: "" },
+            { type: "vocabulaire", titre: "Tableau de vocabulaire", lien: "" },
+            { type: "flashcards", titre: "Flashcards sonores — vocabulaire", lien: "" }
+          ]},
+          { titre: "Etapa 2", sousTitre: "Compréhension orale", ressources: [
+            { type: "co", titre: "Vidéo à regarder à la maison", lien: "" },
+            { type: "fiche", titre: "Fiche de compréhension", lien: "" }
+          ]},
+          { titre: "Etapa 3", sousTitre: "Grammaire", ressources: [
+            { type: "grammaire", titre: "Fiche de grammaire", lien: "" },
+            { type: "flashcards", titre: "Flashcards sonores — conjugaison", lien: "" },
+            { type: "jeu", titre: "Jeu en ligne", lien: "" },
+            { type: "kahoot", titre: "Kahoot de révision", lien: "" }
+          ]},
+          { titre: "Etapa 4", sousTitre: "Conversación", ressources: [
+            { type: "fiche", titre: "Fiche de la conversación", lien: "" }
+          ]},
+          { titre: "Proyecto final", emoji: "🏆", sousTitre: "Évaluation de fin de séquence", ressources: [
+            { type: "projet", titre: "Consigne du projet", lien: "" },
+            { type: "evaluation", titre: "Grille d'évaluation", lien: "" }
+          ]}
+        ]},
+      { id: "B-S3", emoji: "3️⃣", titre: "Module 3", sousTitre: "Titre à compléter", notions: [], etapas: [] },
+      { id: "B-S4", emoji: "4️⃣", titre: "Module 4", sousTitre: "Titre à compléter", notions: [], etapas: [] },
+      { id: "B-S5", emoji: "5️⃣", titre: "Module 5", sousTitre: "Titre à compléter", notions: [], etapas: [] },
+      { id: "B-S6", emoji: "6️⃣", titre: "Module 6", sousTitre: "Titre à compléter", notions: [], etapas: [] }
     ]
   }
 ];

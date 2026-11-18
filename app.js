@@ -204,7 +204,7 @@
     var h = '<div class="titre-page"><span class="gros">' + n.emoji + "</span><div><h1>Espagnol — " + esc(n.nom) + "</h1><p>Choisis ta séquence.</p></div></div>";
     h += '<div class="grille">';
     n.sequences.forEach(function (s) {
-      h += tuile("#/niveau/" + n.id + "/" + s.id, s.emoji || "📘", s.titre, s.sousTitre, n.couleur, s.etapas.length + " étapa" + (s.etapas.length > 1 ? "s" : ""), true);
+      h += tuile("#/niveau/" + n.id + "/" + s.id, s.emoji || "📘", s.titre, s.sousTitre, n.couleur, (s.etapas.length ? s.etapas.length + " étapa" + (s.etapas.length > 1 ? "s" : "") : "⏳ Bientôt"), true);
     });
     h += "</div>";
     if (!n.sequences.length) h += '<p class="vide">Les séquences arrivent bientôt.</p>';
@@ -229,6 +229,7 @@
         '<span class="nb">' + (e.ressources || []).map(function (r) { return (TYPES[r.type] || TYPES.lien).emoji; }).join(" ") + "</span></a>";
     });
     h += "</div>";
+    if (!s.etapas.length) h += '<p class="vide">⏳ Les étapas de cette séquence arrivent bientôt.</p>';
     var notions = (s.notions || []).map(function (id) { return trouver(GRAMMAIRE, id); }).filter(Boolean);
     if (notions.length) {
       h += "<h2>🎬 Grammaire de la séquence</h2><div class='grille'>";
