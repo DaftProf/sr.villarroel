@@ -156,7 +156,17 @@ var NIVEAUX = [
             { type: "evaluation", titre: "Grille d'évaluation", lien: "" }
           ]}
         ]},
-      { id: "4-S3", emoji: "3️⃣", titre: "Séquence 3", sousTitre: "Titre à compléter", notions: [], etapas: [] },
+      { id: "4-S3", emoji: "🏃", titre: "Séquence 3", sousTitre: "¡Moviéndonos!", notions: ["ser-estar"],
+        etapas: [
+          { titre: "Etapa 1", sousTitre: "Le tableau de Laura Vidra", ressources: [
+            { type: "flashcards", titre: "Flashcards sonores — vocabulaire", lien: "docs/4-Quatrieme/4-S3/E1-flashcards-vocabulaire.html" },
+            { type: "flashcards", titre: "Flashcards sonores — grammaire (estar + gérondif)", lien: "docs/4-Quatrieme/4-S3/E1-flashcards-grammaire.html" }
+          ]},
+          { titre: "Etapa 2", sousTitre: "La vidéo « Estar + gerundio »", ressources: [
+            { type: "flashcards", titre: "Flashcards sonores — vocabulaire", lien: "docs/4-Quatrieme/4-S3/E2-flashcards-vocabulaire.html" },
+            { type: "flashcards", titre: "Flashcards sonores — grammaire (está / están + gérondif)", lien: "docs/4-Quatrieme/4-S3/E2-flashcards-grammaire.html" }
+          ]}
+        ]},
       { id: "4-S4", emoji: "4️⃣", titre: "Séquence 4", sousTitre: "Titre à compléter", notions: [], etapas: [] },
       { id: "4-S5", emoji: "5️⃣", titre: "Séquence 5", sousTitre: "Titre à compléter", notions: [], etapas: [] },
       { id: "4-S6", emoji: "6️⃣", titre: "Séquence 6", sousTitre: "Titre à compléter", notions: [], etapas: [] }
