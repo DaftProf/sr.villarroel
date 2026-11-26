@@ -156,7 +156,7 @@ var NIVEAUX = [
             { type: "evaluation", titre: "Grille d'évaluation", lien: "" }
           ]}
         ]},
-      { id: "4-S3", emoji: "🏃", titre: "Séquence 3", sousTitre: "¡Moviéndonos!", notions: ["ser-estar"],
+      { id: "4-S3", emoji: "🏃", titre: "Séquence 3", sousTitre: "¡Moviéndonos!", notions: [],
         etapas: [
           { titre: "Etapa 1", sousTitre: "Le tableau de Laura Vidra", ressources: [
             { type: "flashcards", titre: "Flashcards sonores — vocabulaire", lien: "docs/4-Quatrieme/4-S3/E1-flashcards-vocabulaire.html" },
