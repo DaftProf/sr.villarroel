@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<title>1ère – Secuencia 2 – Entrenamiento de gramática</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--blue:#1f3864;--sub:#eef3f9;--border:#c9d3e0;--ok:#1d7a3a;--okbg:#e3f5e9;--bad:#b3261e;--badbg:#fde7e6;--gram:#f1ecf8;--gramB:#7b4fb0;--ej:#f2f2f2;--warn:#8a5a00;--warnbg:#fff4d6}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:"Microsoft New Tai Lue","Segoe UI",Calibri,Roboto,Arial,sans-serif;color:#222;background:#f4f6f9;font-size:17px;line-height:1.5}
+.wrap{max-width:900px;margin:0 auto;padding:10px}
+header{background:var(--blue);color:#fff;border-radius:10px;padding:12px 16px;margin-bottom:10px}
+header h1{margin:0;font-size:21px}
+header p{margin:2px 0 0;font-size:14px;opacity:.9}
+.tabs{display:flex;gap:6px;margin-bottom:10px;position:sticky;top:0;z-index:20;background:#f4f6f9;padding:6px 0}
+.tab{flex:1;border:2px solid var(--blue);background:#fff;color:var(--blue);border-radius:10px;padding:10px 6px;font-size:15px;font-weight:bold;cursor:pointer;font-family:inherit;line-height:1.25}
+.tab.on{background:var(--blue);color:#fff}
+.page{display:none}.page.on{display:block}
+.card{background:#fff;border-radius:10px;padding:14px 16px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.score{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:15px;color:#444}
+.bar{flex:1;height:10px;background:#e3e8f0;border-radius:6px;overflow:hidden;max-width:300px}
+.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.regla{border-left:5px solid var(--gramB);background:var(--gram)}
+.regla h2{margin:0 0 6px;color:var(--gramB);font-size:18px}
+.regla table{border-collapse:collapse;width:100%;font-size:15px;margin:6px 0}
+.regla td,.regla th{border:1px solid #d6cbe8;padding:4px 6px;text-align:left;vertical-align:top}
+.regla th{background:#e6dcf4}
+.regla .scroll{overflow-x:auto}
+h2.ex{margin:0 0 4px;color:var(--blue);font-size:18px}
+.consigna{margin:0 0 4px}
+.ej{border-left:4px solid var(--blue);background:var(--ej);padding:4px 10px;font-style:italic;font-size:15px;margin:4px 0 12px;border-radius:0 6px 6px 0}
+/* QCM */
+.q{padding:10px 0;border-top:1px solid #eef0f4}
+.q:first-of-type{border-top:none}
+.q .txt{margin-bottom:6px}
+.q .blank{display:inline-block;min-width:70px;border-bottom:2px solid #555;text-align:center;font-weight:bold;padding:0 4px}
+.q.done .blank{color:var(--ok);border-color:var(--ok)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{min-height:44px;padding:8px 14px;border:2px solid var(--border);background:#fff;border-radius:10px;font-size:17px;font-family:inherit;cursor:pointer;color:#222}
+.opt.right{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:bold}
+.opt.wrong{background:var(--badbg);border-color:var(--bad);color:var(--bad);text-decoration:line-through}
+.q.done .opt:not(.right){opacity:.5}
+.exp{display:none;margin-top:6px;font-size:15px;padding:6px 10px;border-radius:8px}
+.exp.show{display:block}
+.exp.good{background:var(--okbg);color:#185c2d}
+.exp.badx{background:var(--badbg);color:#7d1b14}
+/* Ordena */
+.sent{margin:12px 0;padding:10px;border:1px solid var(--border);border-radius:10px;background:#fafcff}
+.sent .top{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.sent .num{font-weight:bold;color:var(--blue)}
+.tools{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.btn{min-height:40px;border:1.5px solid var(--blue);background:#fff;color:var(--blue);border-radius:8px;padding:6px 12px;font-size:15px;font-family:inherit;cursor:pointer}
+.btn.main{background:var(--blue);color:#fff}
+.pista{display:none;font-style:italic;color:var(--warn);background:var(--warnbg);border-radius:8px;padding:6px 10px;margin:6px 0;font-size:15px}
+.pista.show{display:block}
+.slots{display:flex;flex-wrap:wrap;gap:6px;padding:8px;border-radius:8px;background:#fff;border:1.5px dashed #b8c4d6;min-height:58px}
+.slot{min-width:54px;min-height:44px;border-bottom:2px solid #8a9ab5;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px}
+.slot.hover,.bank.hover{background:#e8f0ff}
+.bank{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;min-height:50px;padding:6px;border-radius:8px}
+.w{min-height:40px;display:inline-flex;align-items:center;padding:6px 12px;border:1.5px solid var(--blue);border-radius:8px;background:#fff;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;font-size:17px;white-space:nowrap}
+.w.bad{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.sent.ok{background:var(--okbg);border-color:var(--ok)}
+.sent.ok .slots{border-color:var(--ok);background:#effaf2}
+.sent.ok .slots .w{background:#d9f2e1;border-color:var(--ok);color:var(--ok);font-weight:bold}
+.sent.ok .bank .w{opacity:.4}
+.bravo{display:none;color:var(--ok);font-weight:bold;margin-top:8px;align-items:center;gap:8px}
+.sent.ok .bravo,.wr.ok .bravo{display:flex}
+.wghost{position:fixed;z-index:999;pointer-events:none;padding:6px 12px;border:2px solid var(--blue);border-radius:8px;background:#fff;font-size:17px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+/* Escribe */
+.acc{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px;align-items:center;font-size:14px;color:#555}
+.acc button{min-width:44px;min-height:44px;font-size:19px;border:1.5px solid var(--border);border-radius:8px;background:#fff;cursor:pointer;font-family:inherit}
+.wr{padding:12px 0;border-top:1px solid #eef0f4}
+.wr .prompt{font-weight:bold;margin-bottom:2px}
+.wr .prompt .chip{display:inline-block;background:var(--sub);border:1px solid var(--border);border-radius:6px;padding:1px 8px;margin:2px 2px;font-weight:normal}
+.wr .fr{font-size:14px;color:#666;font-style:italic;margin-bottom:6px}
+.wr input{width:100%;font-size:17px;padding:10px 12px;border:2px solid var(--border);border-radius:10px;font-family:inherit}
+.wr input:focus{outline:none;border-color:var(--blue)}
+.wr.ok input{border-color:var(--ok);background:var(--okbg);color:var(--ok);font-weight:bold}
+.wr.ko input{border-color:var(--bad);background:#fff7f7}
+.wr .row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.fb{display:none;margin-top:6px;font-size:15px;padding:6px 10px;border-radius:8px}
+.fb.show{display:block}
+.fb.badx{background:var(--badbg);color:#7d1b14}
+.fb.casi{background:var(--warnbg);color:var(--warn)}
+.fb b.k{color:var(--bad)}
+.sol{display:none;margin-top:6px;font-size:15px;color:#185c2d}
+.sol.show{display:block}
+.spk{border:none;background:none;font-size:20px;cursor:pointer;padding:0 4px}
+@media (max-width:600px){
+  body{font-size:16px}.wrap{padding:6px}.card{padding:12px}
+  header h1{font-size:18px}.tab{font-size:13px;padding:8px 4px}
+  .tools{margin-left:0;width:100%}.tools .btn{flex:1}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><h1>🇪🇸 1ère – Secuencia 2 : El arte, ¿instrumento de poder o contrapoder?</h1><p>Entrenamiento de gramática – el pretérito indefinido, el pretérito perfecto y los conectores lógicos</p></header>
+  <nav class="tabs" id="tabs"></nav>
+  <main id="pages"></main>
+</div>
+<script>
+const DATA={"filename": "1e_S2_Entrenamiento_gramatica.html", "file_title": "1ère – Secuencia 2 – Entrenamiento de gramática", "h1": "🇪🇸 1ère – Secuencia 2 : El arte, ¿instrumento de poder o contrapoder?", "sub": "Entrenamiento de gramática – el pretérito indefinido, el pretérito perfecto y los conectores lógicos", "pages": [{"title": "El pretérito indefinido", "reglaTitle": "¿Cómo funciona? El pretérito indefinido", "regla": "<p>Action <b>terminée</b> dans le passé, souvent avec une date (en 1937, en 1973, el 26 de abril).</p>\n<div class=\"scroll\"><table><tr><th></th><th>pintar</th><th>nacer / describir</th></tr>\n<tr><td>yo</td><td>pint<b>é</b></td><td>nac<b>í</b></td></tr><tr><td>tú</td><td>pint<b>aste</b></td><td>nac<b>iste</b></td></tr>\n<tr><td>él / ella</td><td>pint<b>ó</b></td><td>nac<b>ió</b></td></tr><tr><td>nosotros</td><td>pint<b>amos</b></td><td>nac<b>imos</b></td></tr>\n<tr><td>vosotros</td><td>pint<b>asteis</b></td><td>nac<b>isteis</b></td></tr><tr><td>ellos / ellas</td><td>pint<b>aron</b></td><td>nac<b>ieron</b></td></tr></table></div>\n<p><b>Irréguliers</b> : hacer → <b>hizo</b> · ser / ir → <b>fue</b> · querer → <b>quiso</b> · poder → <b>pudo</b> · estar → <b>estuvo</b> · tener → <b>tuvo</b> · detener → <b>detuvo</b>, detuvieron · dar → <b>dio</b>.</p>\n<p>⚠️ L'accent est essentiel : <b>pinto</b> = je peins (présent) / <b>pintó</b> = il peignit.</p>", "qcmConsigna": "Choisis la bonne forme du verbe.", "qcmEj": "En 1939, Franco ___ la guerra. (ganar) → <b>ganó</b>", "qcm": [{"q": "En 1635, Velázquez ___ al rey Felipe IV. (pintar)", "opts": ["pintó", "pinto", "pintado", "ha pintado"], "exp": "Une date terminée → <b>indefinido</b> : pint<b>ó</b>, avec un accent.", "why": {"pinto": "Sans accent, <b>pinto</b> = je peins (présent).", "ha pintado": "Avec une date passée (1635), on utilise l'<b>indefinido</b>."}}, {"q": "Picasso ___ el Guernica en 1937. (hacer)", "opts": ["hizo", "hació", "hice", "ha hecho"], "exp": "<b>hacer</b> est irrégulier : hice, hiciste, <b>hizo</b>.", "why": {"hice": "<b>hice</b> = je fis. Le sujet est Picasso (él)."}}, {"q": "En 1973, los militares ___ a Víctor Jara. (detener)", "opts": ["detuvieron", "detenieron", "detuvo", "han detenido"], "exp": "<b>detener</b> se conjugue comme tener : <b>detuvieron</b>.", "why": {}}, {"q": "Víctor Jara ___ en 1932. (nacer)", "opts": ["nació", "nacio", "nací", "ha nacido"], "exp": "él → <b>-ió</b>, avec un accent : nac<b>ió</b>.", "why": {}}, {"q": "En 1981, el cuadro ___ a Madrid. (llegar)", "opts": ["llegó", "llego", "llegué", "ha llegado"], "exp": "Date terminée → indefinido : lleg<b>ó</b>.", "why": {}}, {"q": "Felipe IV ___ mostrar su poder. (querer)", "opts": ["quiso", "querió", "quise", "ha querido"], "exp": "<b>querer</b> est irrégulier : quise, quisiste, <b>quiso</b>.", "why": {}}, {"q": "En 1937, Picasso ___ en París. (estar)", "opts": ["estuvo", "estó", "estuve", "ha estado"], "exp": "<b>estar</b> est irrégulier : estuve, estuviste, <b>estuvo</b>.", "why": {}}], "ordenaEj": "pintó · Goya · pinta · al rey → <b>Goya pintó al rey.</b>", "ordena": [{"words": ["En", "1635,", "Velázquez", "pintó", "al", "rey", "sobre", "un", "caballo."], "intrus": ["pinto", "el", "de", "ha"], "fr": "En 1635, Velázquez peignit le roi sur un cheval."}, {"words": ["El", "26", "de", "abril", "de", "1937,", "la", "Legión", "Cóndor", "bombardeó", "Gernika."], "intrus": ["bombardea", "ha", "a", "los"], "fr": "Le 26 avril 1937, la Légion Condor bombarda Gernika."}, {"words": ["En", "1973,", "los", "militares", "detuvieron", "a", "Víctor", "Jara."], "intrus": ["detenieron", "han", "el", "de"], "fr": "En 1973, les militaires arrêtèrent Víctor Jara."}], "escribeConsigna": "Écris la phrase avec le verbe au <b>pretérito indefinido</b>. Garde l'ordre des éléments.", "escribeEj": "en 1939 · Franco · ganar · la guerra → <b>En 1939, Franco ganó la guerra.</b>", "escribe": [{"prompt": "en 1635 · Velázquez · pintar · un retrato del rey", "answers": ["En 1635 Velázquez pintó un retrato del rey"], "fr": "En 1635, Velázquez peignit un portrait du roi.", "hint": "pintar → él pint<b>ó</b> (avec un accent)"}, {"prompt": "en 1937 · Picasso · hacer · el Guernica", "answers": ["En 1937 Picasso hizo el Guernica"], "fr": "En 1937, Picasso fit le Guernica.", "hint": "hacer → él <b>hizo</b> (irrégulier)"}, {"prompt": "Víctor Jara · nacer · en 1932", "answers": ["Víctor Jara nació en 1932"], "fr": "Víctor Jara naquit en 1932.", "hint": "nacer → él nac<b>ió</b> · Víctor prend un accent"}, {"prompt": "el rey · querer · mostrar su poder", "answers": ["El rey quiso mostrar su poder"], "fr": "Le roi voulut montrer son pouvoir.", "hint": "querer → él <b>quiso</b> (irrégulier)"}, {"prompt": "en 1981 · el cuadro · llegar · a España", "answers": ["En 1981 el cuadro llegó a España"], "fr": "En 1981, le tableau arriva en Espagne.", "hint": "llegar → él lleg<b>ó</b>"}, {"prompt": "los militares · torturar · a Víctor Jara", "answers": ["Los militares torturaron a Víctor Jara"], "fr": "Les militaires torturèrent Víctor Jara.", "hint": "torturar → ellos tortur<b>aron</b>"}]}, {"title": "El perfecto y los conectores", "reglaTitle": "¿Cómo funciona? El pretérito perfecto et les connecteurs", "regla": "<p><b>haber</b> (he, has, <b>ha</b>, hemos, habéis, <b>han</b>) + <b>participe</b> (-ar → <b>-ado</b>, -er / -ir → <b>-ido</b>) : <i>ha pintado, ha podido</i>.</p>\n<p>On l'utilise quand l'action a un <b>lien avec le présent</b> : <b>hoy, este año, ya, nunca, hasta hoy</b>. Le participe ne s'accorde pas : <i>la ciudad ha recuperad<b>o</b></i>.</p>\n<p><b>Participes irréguliers</b> : hacer → <b>hecho</b> · decir → <b>dicho</b> · ver → <b>visto</b> · escribir → <b>escrito</b> · poner → <b>puesto</b> · exponer → <b>expuesto</b> · descubrir → <b>descubierto</b> · volver → <b>vuelto</b>.</p>\n<p>Verbe pronominal : <b>se ha</b> convertido, <b>se han</b> convertido.</p>\n<div class=\"scroll\"><table><tr><th>Cause</th><th>Opposition</th><th>Conséquence</th></tr>\n<tr><td>porque</td><td>sin embargo · mientras que</td><td>así que · por lo tanto · por eso</td></tr></table></div>", "qcmConsigna": "Choisis le bon temps, le bon participe ou le bon connecteur.", "qcmEj": "Hoy, el museo ___ el cuadro. (exponer) → <b>ha expuesto</b>", "qcm": [{"q": "Hoy, el Guernica se ___ en un símbolo de paz.", "opts": ["ha convertido", "convirtió", "ha convertida", "he convertido"], "exp": "<b>hoy</b> → perfecto : se <b>ha convertido</b> (participe invariable).", "why": {"ha convertida": "Le participe ne s'accorde pas : convertid<b>o</b>.", "convirtió": "Avec <b>hoy</b>, on utilise le perfecto."}}, {"q": "El pintor ha ___ el retrato. (descubrir)", "opts": ["descubierto", "descubrido", "descubriado", "descubrió"], "exp": "Participe irrégulier : <b>descubierto</b>.", "why": {}}, {"q": "Este año, el museo ___ el mural. (exponer)", "opts": ["ha expuesto", "ha exponido", "expuso", "ha expuesta"], "exp": "<b>este año</b> → perfecto ; participe irrégulier : <b>expuesto</b>.", "why": {}}, {"q": "En 1981, el mural ___ censurado.", "opts": ["fue", "ha sido", "es", "fui"], "exp": "Une date terminée (1981) → indefinido : <b>fue</b>.", "why": {}}, {"q": "Velázquez pintó a un rey guerrero; ___, hoy el retrato de Felipe VI muestra a un rey cercano.", "opts": ["sin embargo", "por lo tanto", "porque", "así que"], "exp": "On oppose deux idées → <b>sin embargo</b> (cependant).", "why": {}}, {"q": "La dictadura no consiguió callar su voz; ___, sus canciones se han convertido en un símbolo.", "opts": ["por lo tanto", "mientras que", "porque", "sin embargo"], "exp": "La 2e partie est une conséquence de la 1re → <b>por lo tanto</b>.", "why": {}}, {"q": "Felipe IV lleva una armadura ___ Felipe VI lleva un traje.", "opts": ["mientras que", "por lo tanto", "así que", "porque"], "exp": "On compare deux personnes qui s'opposent → <b>mientras que</b> (tandis que).", "why": {}}], "ordenaEj": "ha · Hoy · el museo · abierto · abrió → <b>Hoy el museo ha abierto.</b>", "ordena": [{"words": ["Hoy,", "el", "Guernica", "se", "ha", "convertido", "en", "un", "alegato", "universal."], "intrus": ["convirtió", "han", "una", "a"], "fr": "Aujourd'hui, le Guernica est devenu un plaidoyer universel."}, {"words": ["La", "ciudad", "censuró", "el", "mural;", "sin", "embargo,", "hoy", "el", "público", "ha", "podido", "verlo."], "intrus": ["censura", "han", "pudo", "lo"], "fr": "La ville censura la fresque ; cependant, aujourd'hui le public a pu la voir."}, {"words": ["Los", "militares", "asesinaron", "a", "Víctor", "Jara;", "por", "eso,", "su", "voz", "se", "ha", "convertido", "en", "un", "símbolo."], "intrus": ["asesinó", "han", "sus", "una"], "fr": "Les militaires assassinèrent Víctor Jara ; c'est pourquoi sa voix est devenue un symbole."}], "escribeConsigna": "Écris la phrase : <b>indefinido</b> s'il y a une date, <b>perfecto</b> s'il y a <i>hoy</i> ou <i>este año</i>. Garde l'ordre des éléments.", "escribeEj": "hoy · el artista · pintar · un mural → <b>Hoy, el artista ha pintado un mural.</b>", "escribe": [{"prompt": "hoy · la ciudad · recuperar · el mural", "answers": ["Hoy la ciudad ha recuperado el mural"], "fr": "Aujourd'hui, la ville a récupéré la fresque.", "hint": "hoy → perfecto : <b>ha</b> recuper<b>ado</b>"}, {"prompt": "este año · el museo · exponer · el cuadro", "answers": ["Este año el museo ha expuesto el cuadro"], "fr": "Cette année, le musée a exposé le tableau.", "hint": "este año → perfecto · participe irrégulier : <b>expuesto</b>"}, {"prompt": "en 1973 · Pinochet · dar · un golpe de Estado", "answers": ["En 1973 Pinochet dio un golpe de Estado"], "fr": "En 1973, Pinochet fit un coup d'État.", "hint": "Date → indefinido · dar → él <b>dio</b> (sans accent)"}, {"prompt": "hoy · sus canciones · convertirse · en un símbolo", "answers": ["Hoy sus canciones se han convertido en un símbolo"], "fr": "Aujourd'hui, ses chansons sont devenues un symbole.", "hint": "ellas → <b>se han</b> convert<b>ido</b>"}, {"prompt": "la dictadura · censurar · el arte · sin embargo · hoy · los artistas · denunciar · las injusticias", "answers": ["La dictadura censuró el arte sin embargo hoy los artistas han denunciado las injusticias"], "fr": "La dictature censura l'art ; cependant, aujourd'hui, les artistes ont dénoncé les injustices.", "hint": "1re partie : indefinido (censur<b>ó</b>) · 2e partie : perfecto (<b>han</b> denunci<b>ado</b>)"}, {"prompt": "Picasso · pintar · el horror · por lo tanto · el cuadro · convertirse · en un alegato universal", "answers": ["Picasso pintó el horror por lo tanto el cuadro se ha convertido en un alegato universal"], "fr": "Picasso peignit l'horreur ; par conséquent, le tableau est devenu un plaidoyer universel.", "hint": "pint<b>ó</b> (indefinido) · <b>se ha</b> convertido (perfecto)"}]}]};
+
+/* ---------- Voz ---------- */
+let VOICES=[];
+function lv(){if('speechSynthesis' in window) VOICES=speechSynthesis.getVoices();}
+lv(); if('speechSynthesis' in window) speechSynthesis.onvoiceschanged=lv;
+function say(t){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(t); u.lang='es-ES'; u.rate=.9;
+  const v=['es-ES','es-MX','es-US','es'].map(p=>VOICES.find(v=>v.lang&&v.lang.replace('_','-').startsWith(p))).find(Boolean);
+  if(v) u.voice=v; speechSynthesis.speak(u);
+}
+function spk(text){const b=document.createElement('button');b.className='spk';b.type='button';b.textContent='🔊';b.title='Escuchar';b.onclick=e=>{e.stopPropagation();say(text);};return b;}
+function el(tag,cls,html){const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+/* ---------- Normalisation ---------- */
+function norm(s){return s.normalize('NFC').toLowerCase().replace(/[.,;:!?¿¡«»"“”()…]/g,' ').replace(/[‐-―-]/g,' ').replace(/\s+/g,' ').trim();}
+function noAcc(s){return s.normalize('NFD').replace(/[̀-ͯ]/g,'');}
+
+/* ---------- Construction des pages ---------- */
+const tabsEl=document.getElementById('tabs'), pagesEl=document.getElementById('pages');
+const scores=[];
+DATA.pages.forEach((P,pi)=>{
+  const tab=el('button','tab'+(pi?'':' on'),`Página ${pi+1}<br><span style="font-weight:normal">${P.title}</span>`);
+  tab.type='button'; tabsEl.appendChild(tab);
+  const page=el('section','page'+(pi?'':' on')); pagesEl.appendChild(page);
+  tab.onclick=()=>{document.querySelectorAll('.tab').forEach((t,k)=>t.classList.toggle('on',k===pi));document.querySelectorAll('.page').forEach((p,k)=>p.classList.toggle('on',k===pi));window.scrollTo(0,0);};
+
+  const total=P.qcm.length+P.ordena.length+P.escribe.length;
+  const sc={done:new Set(),total};
+  const scoreCard=el('div','card score',`<span>✅ Respuestas correctas : <b class="n">0</b> / ${total}</span><span class="bar"><i></i></span>`);
+  page.appendChild(scoreCard);
+  sc.upd=()=>{scoreCard.querySelector('.n').textContent=sc.done.size;scoreCard.querySelector('i').style.width=(100*sc.done.size/total)+'%';};
+  scores.push(sc);
+  const mark=(id,ok)=>{ok?sc.done.add(id):sc.done.delete(id);sc.upd();};
+
+  page.appendChild(el('div','card regla',`<h2>💡 ${P.reglaTitle}</h2>${P.regla}`));
+
+  /* Ejercicio 1 : QCM */
+  const c1=el('div','card',`<h2 class="ex">Ejercicio 1 – Elige la respuesta correcta</h2><p class="consigna">${P.qcmConsigna}</p><div class="ej"><b>Ejemplo :</b> ${P.qcmEj}</div>`);
+  page.appendChild(c1);
+  P.qcm.forEach((Q,qi)=>{
+    const q=el('div','q');
+    const txt=el('div','txt',`<b>${qi+1}.</b> `+Q.q.replace('___','<span class="blank">&nbsp;</span>'));
+    q.appendChild(txt);
+    const opts=el('div','opts'); q.appendChild(opts);
+    const exp=el('div','exp'); q.appendChild(exp);
+    shuffle(Q.opts).forEach(o=>{
+      const b=el('button','opt',o); b.type='button';
+      b.onclick=()=>{
+        if(q.classList.contains('done')) return;
+        if(o===Q.opts[0]){
+          b.classList.add('right'); q.classList.add('done');
+          const fillTxt=o.startsWith('∅')?'':o; q.querySelector('.blank').textContent=fillTxt||'∅';
+          exp.className='exp show good'; exp.innerHTML='✅ '+Q.exp;
+          const full=Q.q.replace(' ___',fillTxt?' '+fillTxt:'').replace('___',fillTxt).replace(/\s*\(.*?\)\s*$/,'').replace(/<[^>]+>/g,'');
+          exp.appendChild(spk(full));
+          mark('q'+qi,true);
+        }else{
+          b.classList.add('wrong');
+          exp.className='exp show badx'; exp.innerHTML='❌ '+(Q.why&&Q.why[o]?Q.why[o]:'No es correcto. ¡Inténtalo otra vez!');
+        }
+      };
+      opts.appendChild(b);
+    });
+    c1.appendChild(q);
+  });
+
+  /* Ejercicio 2 : Ordena */
+  const c2=el('div','card',`<h2 class="ex">Ejercicio 2 – Ordena la frase</h2><p class="consigna">Glisse les mots (ou touche-les) pour construire la phrase. <b>Attention, il y a des intrus !</b></p><div class="ej"><b>Ejemplo :</b> ${P.ordenaEj}</div>`);
+  page.appendChild(c2);
+  P.ordena.forEach((D,si)=>{
+    const s=el('div','sent');
+    s.innerHTML=`<div class="top"><span class="num">Frase ${si+1}</span><span class="tools"><button type="button" class="btn b-p">💡 Pista</button><button type="button" class="btn b-s">✔ Solución</button><button type="button" class="btn b-r">↺</button></span></div><div class="pista">🇫🇷 ${D.fr}</div><div class="slots"></div><div class="bank"></div><div class="bravo">✅ ¡Muy bien!</div>`;
+    s.querySelector('.bravo').appendChild(spk(D.words.join(' ')));
+    c2.appendChild(s);
+    const fill=()=>{
+      const slots=s.querySelector('.slots'),bank=s.querySelector('.bank');
+      slots.innerHTML='';bank.innerHTML='';
+      D.words.forEach(()=>slots.appendChild(el('span','slot')));
+      let o=shuffle(D.words.concat(D.intrus));
+      o.forEach(t=>{const w=el('span','w');w.textContent=t;bindWord(w);bank.appendChild(w);});
+      check();
+    };
+    const check=()=>{
+      const slots=[...s.querySelectorAll('.slot')];
+      s.querySelectorAll('.w').forEach(w=>w.classList.remove('bad'));
+      if(!slots.every(x=>x.querySelector('.w'))){s.classList.remove('ok');mark('o'+si,false);return;}
+      let ok=true;
+      slots.forEach((x,k)=>{const w=x.querySelector('.w');if(w.textContent!==D.words[k]){ok=false;w.classList.add('bad');}});
+      s.classList.toggle('ok',ok); mark('o'+si,ok);
+    };
+    s._check=check;
+    s.querySelector('.b-r').onclick=fill;
+    s.querySelector('.b-p').onclick=()=>s.querySelector('.pista').classList.toggle('show');
+    s.querySelector('.b-s').onclick=()=>{fill();const slots=[...s.querySelectorAll('.slot')],bank=s.querySelector('.bank');
+      D.words.forEach((t,k)=>{const w=[...bank.querySelectorAll('.w')].find(x=>x.textContent===t);if(w)slots[k].appendChild(w);});check();};
+    fill();
+  });
+
+  /* Ejercicio 3 : Escribe */
+  const c3=el('div','card',`<h2 class="ex">Ejercicio 3 – Escribe la frase</h2><p class="consigna">${P.escribeConsigna}</p><div class="ej"><b>Ejemplo :</b> ${P.escribeEj}</div>
+    <div class="acc">Accents : ${['á','é','í','ó','ú','ñ','ü','¿','¡'].map(c=>`<button type="button" data-c="${c}">${c}</button>`).join('')}</div>`);
+  page.appendChild(c3);
+  P.escribe.forEach((W,wi)=>{
+    const d=el('div','wr');
+    d.innerHTML=`<div class="prompt">${wi+1}. ${W.prompt.split(' · ').map(x=>`<span class="chip">${x}</span>`).join(' ')}</div>
+      <div class="fr">🇫🇷 ${W.fr}</div>
+      <input type="text" autocomplete="off" autocorrect="off" autocapitalize="sentences" spellcheck="false" enterkeyhint="done" placeholder="Escribe la frase en español…">
+      <div class="row"><button type="button" class="btn main b-c">Comprobar</button><button type="button" class="btn b-h">💡 Pista</button><button type="button" class="btn b-sol">Solución</button></div>
+      <div class="pista">${W.hint}</div><div class="fb"></div><div class="sol">✔ ${W.answers[0]}.</div><div class="bravo">✅ ¡Perfecto!</div>`;
+    d.querySelector('.bravo').appendChild(spk(W.answers[0]));
+    c3.appendChild(d);
+    const inp=d.querySelector('input'), fb=d.querySelector('.fb');
+    const check=()=>{
+      const u=norm(inp.value); if(!u){return;}
+      const A=W.answers.map(norm);
+      d.classList.remove('ok','ko'); fb.className='fb';
+      if(A.includes(u)){d.classList.add('ok');mark('w'+wi,true);inp.blur();return;}
+      mark('w'+wi,false); d.classList.add('ko');
+      if(A.map(noAcc).includes(noAcc(u))){fb.className='fb show casi';fb.innerHTML='🟠 ¡Casi! Revisa los <b>acentos</b> (á, é, í, ó, ú, ñ).';return;}
+      // mots à revoir
+      const ut=u.split(' ');
+      let best=A[0].split(' '),bs=-1;
+      A.forEach(a=>{const t=a.split(' ');const sc=ut.filter(x=>t.includes(x)).length;if(sc>bs){bs=sc;best=t;}});
+      const pool=best.slice(), wrong=[];
+      ut.forEach(x=>{const k=pool.indexOf(x);if(k>=0)pool.splice(k,1);else wrong.push(x);});
+      let msg='❌ ';
+      if(wrong.length) msg+='Revisa : '+wrong.map(x=>`<b class="k">${x}</b>`).join(', ')+'. ';
+      if(pool.length && !wrong.length) msg+='Il manque un ou plusieurs mots. ';
+      if(!wrong.length && !pool.length) msg+="L'ordre des mots n'est pas correct. ";
+      msg+='Utilise la 💡 Pista si tu as besoin d\'aide.';
+      fb.className='fb show badx'; fb.innerHTML=msg;
+    };
+    d.querySelector('.b-c').onclick=check;
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();check();}});
+    inp.addEventListener('input',()=>{if(d.classList.contains('ok')){d.classList.remove('ok');mark('w'+wi,false);}});
+    d.querySelector('.b-h').onclick=()=>d.querySelector('.pista').classList.toggle('show');
+    d.querySelector('.b-sol').onclick=()=>d.querySelector('.sol').classList.toggle('show');
+  });
+  sc.upd();
+});
+
+/* ---------- Accents (garde le focus sur mobile) ---------- */
+let lastInput=null;
+document.addEventListener('focusin',e=>{if(e.target.tagName==='INPUT') lastInput=e.target;});
+document.querySelectorAll('.acc button').forEach(b=>{
+  b.addEventListener('pointerdown',e=>e.preventDefault());
+  b.addEventListener('mousedown',e=>e.preventDefault());
+  b.addEventListener('click',()=>{
+    const page=b.closest('.page');
+    let i=(lastInput&&page.contains(lastInput))?lastInput:page.querySelector('.wr:not(.ok) input');
+    if(!i) return;
+    const c=b.dataset.c, s=i.selectionStart??i.value.length, e2=i.selectionEnd??i.value.length;
+    i.value=i.value.slice(0,s)+c+i.value.slice(e2); i.focus();
+    try{i.setSelectionRange(s+c.length,s+c.length);}catch(_){}
+    i.dispatchEvent(new Event('input'));
+  });
+});
+
+/* ---------- Glisser-déposer tactile + souris ---------- */
+let BD=null;
+function bindWord(w){
+  w.addEventListener('pointerdown',e=>{
+    if(w.closest('.sent').classList.contains('ok')) return;
+    if(e.pointerType==='mouse'&&e.button!==0) return;
+    BD={w,x:e.clientX,y:e.clientY,moving:false,g:null};
+    try{w.setPointerCapture(e.pointerId);}catch(_){}
+  });
+  w.addEventListener('pointermove',e=>{
+    if(!BD||BD.w!==w) return;
+    if(!BD.moving&&Math.hypot(e.clientX-BD.x,e.clientY-BD.y)>8){
+      BD.moving=true;const g=el('div','wghost');g.textContent=w.textContent;document.body.appendChild(g);BD.g=g;w.style.opacity=.35;
+    }
+    if(BD.moving){e.preventDefault();BD.g.style.left=(e.clientX-24)+'px';BD.g.style.top=(e.clientY-44)+'px';
+      document.querySelectorAll('.hover').forEach(x=>x.classList.remove('hover'));
+      const t=targetAt(e,w);if(t)t.classList.add('hover');}
+  });
+  const end=e=>{
+    if(!BD||BD.w!==w) return;
+    const sent=w.closest('.sent');
+    if(BD.moving){const t=targetAt(e,w);BD.g.remove();w.style.opacity='';document.querySelectorAll('.hover').forEach(x=>x.classList.remove('hover'));if(t)place(w,t);}
+    else if(e.type==='pointerup'){
+      if(w.parentElement.classList.contains('slot')) place(w,sent.querySelector('.bank'));
+      else{const em=[...sent.querySelectorAll('.slot')].find(s=>!s.querySelector('.w'));if(em)place(w,em);}
+    }
+    BD=null;
+  };
+  w.addEventListener('pointerup',end);w.addEventListener('pointercancel',e=>{if(BD&&BD.g){BD.g.remove();w.style.opacity='';}BD=null;});
+  w.addEventListener('contextmenu',e=>e.preventDefault());
+}
+function targetAt(e,w){const x=document.elementFromPoint(e.clientX,e.clientY);if(!x)return null;const t=x.closest('.slot,.bank');return t&&t.closest('.sent')===w.closest('.sent')?t:null;}
+function place(w,t){
+  const sent=w.closest('.sent'),from=w.parentElement;
+  if(t.classList.contains('slot')){const o=t.querySelector('.w');if(o&&o!==w)(from.classList.contains('slot')?from:sent.querySelector('.bank')).appendChild(o);t.appendChild(w);}
+  else sent.querySelector('.bank').appendChild(w);
+  sent._check();
+}
+
+</script>
+</body>
+</html>
