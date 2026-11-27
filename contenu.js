@@ -240,7 +240,13 @@ var NIVEAUX = [
             { type: "evaluation", titre: "Grille d'évaluation", lien: "" }
           ]}
         ]},
-      { id: "T-S3", emoji: "3️⃣", titre: "Séquence 3", sousTitre: "Titre à compléter", notions: [], etapas: [] },
+      { id: "T-S3", emoji: "🎨", titre: "Séquence 3", sousTitre: "El arte, ¿poder o contrapoder?", notions: [],
+        etapas: [
+          { titre: "Etapa 1", sousTitre: "Las Meninas y Equipo Crónica", ressources: [
+            { type: "flashcards", titre: "Flashcards sonores — vocabulaire", lien: "docs/0-Terminale/T-S3/Flashcards_T-S3_Etapa1_vocabulario.html" },
+            { type: "jeu", emoji: "🏠", titre: "Entrenamiento en casa — grammaire, vocabulaire et phrases", lien: "docs/0-Terminale/T-S3/T_Etapa1_Entrenamiento_casa.html" }
+          ]}
+        ]},
       { id: "T-S4", emoji: "4️⃣", titre: "Séquence 4", sousTitre: "Titre à compléter", notions: [], etapas: [] },
       { id: "T-S5", emoji: "5️⃣", titre: "Séquence 5", sousTitre: "Titre à compléter", notions: [], etapas: [] },
       { id: "T-S6", emoji: "6️⃣", titre: "Séquence 6", sousTitre: "Titre à compléter", notions: [], etapas: [] }
