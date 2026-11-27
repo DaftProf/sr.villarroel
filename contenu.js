@@ -175,7 +175,10 @@ var NIVEAUX = [
           { titre: "Etapa 4", sousTitre: "Conversación – EO", ressources: [ ]},
           { titre: "Etapa 5", sousTitre: "Evaluación 1 – EE", ressources: [ ]},
           { titre: "Etapa 6", sousTitre: "CE", ressources: [ ]},
-          { titre: "Etapa 7", sousTitre: "CE-EO", ressources: [ ]},
+          { titre: "Etapa 7", sousTitre: "CE-EO", ressources: [
+            { type: "kahoot", titre: "Kahoot — Víctor Jara, la voz que no pudieron callar", lien: "https://create.kahoot.it/details/etapa-7-victor-jara-la-voz-que-no-pudieron-callar-1ere/75d8cfe4-0ce7-4308-b15c-b62a88a64f90" },
+            { type: "kahoot", titre: "Kahoot — Vocabulario y gramática (Víctor Jara)", lien: "https://create.kahoot.it/details/etapa-7-vocabulario-y-gramatica-1ere-victor-jara/95df89df-127d-422f-bb19-4c560b5e602c" }
+          ]},
           { titre: "Etapa 8", sousTitre: "Evaluación 2 – Proyecto", ressources: [
             { type: "grammaire", emoji: "🏠", titre: "Entrenamiento de gramática — indefinido, perfecto y conectores", lien: "docs/1-Premiere/1-S2/1e_S2_Entrenamiento_gramatica.html" },
             { type: "flashcards", titre: "Flashcards sonores — vocabulaire de toute la séquence", lien: "docs/1-Premiere/1-S2/1e_S2_Flashcards_Vocabulario.html" }
@@ -222,7 +225,9 @@ var NIVEAUX = [
         etapas: [
           { titre: "Etapa 1", sousTitre: "Las Meninas y Equipo Crónica", ressources: [
             { type: "flashcards", titre: "Flashcards sonores — vocabulaire", lien: "docs/0-Terminale/T-S3/Flashcards_T-S3_Etapa1_vocabulario.html" },
-            { type: "jeu", emoji: "🏠", titre: "Entrenamiento en casa — grammaire, vocabulaire et phrases", lien: "docs/0-Terminale/T-S3/T_Etapa1_Entrenamiento_casa.html" }
+            { type: "jeu", emoji: "🏠", titre: "Entrenamiento en casa — grammaire, vocabulaire et phrases", lien: "docs/0-Terminale/T-S3/T_Etapa1_Entrenamiento_casa.html" },
+            { type: "kahoot", titre: "Kahoot — Las Meninas y Equipo Crónica", lien: "https://create.kahoot.it/details/terminale-etapa-1-las-meninas-y-equipo-cronica/d146e75d-b74c-45b9-89e8-460733e72478" },
+            { type: "kahoot", titre: "Kahoot — Arte y poder: gramática", lien: "https://create.kahoot.it/details/terminale-s3-arte-y-poder-gramatica/12d8a1ac-f408-414f-b2a2-3cef1ab73722" }
           ]}
         ]},
       { id: "T-S4", emoji: "4️⃣", titre: "Séquence 4", sousTitre: "Titre à compléter", notions: [], etapas: [] },
