@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <title>¡Español con el profe!</title>
-  <link rel="icon" href="https://cdn.jsdelivr.net/npm/flag-icons@7.6.0/flags/1x1/es.svg">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="apple-touch-icon" href="images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
@@ -14,6 +15,7 @@
 <body>
   <header class="entete">
     <a href="#/" class="logo">
+      <img src="images/logo.png" class="logo-img" alt="">
       <span>
         <span class="logo-titre" id="site-titre">¡Español con el profe!</span>
         <span class="logo-sous" id="site-sous"></span>
@@ -21,6 +23,7 @@
     </a>
     <nav class="liens-externes" id="liens-externes"></nav>
   </header>
+  <a href="#/" class="banniere" id="banniere"><img src="images/image.png" alt="¡Español con el profe! Les cours d'espagnol de M. Villarroel"></a>
   <!-- Drapeaux des 21 pays hispanophones (images) -->
   <div class="banderas" aria-label="Pays hispanophones">
     <img src="https://cdn.jsdelivr.net/npm/flag-icons@7.6.0/flags/4x3/es.svg" alt="España" title="España" width="32" height="24">
@@ -59,5 +62,10 @@
   <script src="app.js"></script>
   <!-- Compteur de visites (GoatCounter, sans cookie) : statistiques sur https://sr-villarroel.goatcounter.com -->
   <script data-goatcounter="https://sr-villarroel.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  <script>
+    // La grande bannière ne s'affiche que sur la page d'accueil
+    function majBanniere() { var b = document.getElementById("banniere"); if (b) b.style.display = (location.hash.replace(/^#\/?/, "") === "") ? "" : "none"; }
+    window.addEventListener("hashchange", majBanniere); majBanniere();
+  </script>
 </body>
 </html>
