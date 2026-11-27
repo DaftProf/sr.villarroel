@@ -167,29 +167,18 @@ var NIVEAUX = [
     sequences: [
       { id: "1-S1", emoji: "📘", titre: "Séquence 1", sousTitre: "Titre à compléter", notions: [],
         etapas: [ { titre: "Etapa 1", sousTitre: "", ressources: [ { type: "fiche", titre: "Fiche de l'étapa", lien: "" } ] } ] },
-      { id: "1-S2", emoji: "2️⃣", titre: "Séquence 2", sousTitre: "Titre à compléter", notions: [],
+      { id: "1-S2", emoji: "2️⃣", titre: "Séquence 2", sousTitre: "El arte, ¿instrumento de poder o contrapoder?", notions: ["preterito"],
         etapas: [
-          { titre: "Etapa 1", sousTitre: "Découverte du vocabulaire", ressources: [
-            { type: "fiche", titre: "Fiche de l'étapa 1", lien: "" },
-            { type: "vocabulaire", titre: "Tableau de vocabulaire", lien: "" },
-            { type: "flashcards", titre: "Flashcards sonores — vocabulaire", lien: "" }
-          ]},
-          { titre: "Etapa 2", sousTitre: "Compréhension orale", ressources: [
-            { type: "co", titre: "Vidéo à regarder à la maison", lien: "" },
-            { type: "fiche", titre: "Fiche de compréhension", lien: "" }
-          ]},
-          { titre: "Etapa 3", sousTitre: "Grammaire", ressources: [
-            { type: "grammaire", titre: "Fiche de grammaire", lien: "" },
-            { type: "flashcards", titre: "Flashcards sonores — conjugaison", lien: "" },
-            { type: "jeu", titre: "Jeu en ligne", lien: "" },
-            { type: "kahoot", titre: "Kahoot de révision", lien: "" }
-          ]},
-          { titre: "Etapa 4", sousTitre: "Conversación", ressources: [
-            { type: "fiche", titre: "Fiche de la conversación", lien: "" }
-          ]},
-          { titre: "Proyecto final", emoji: "🏆", sousTitre: "Évaluation de fin de séquence", ressources: [
-            { type: "projet", titre: "Consigne du projet", lien: "" },
-            { type: "evaluation", titre: "Grille d'évaluation", lien: "" }
+          { titre: "Etapa 1", sousTitre: "CE-EE", ressources: [ ]},
+          { titre: "Etapa 2", sousTitre: "CE-EE", ressources: [ ]},
+          { titre: "Etapa 3", sousTitre: "CO", ressources: [ ]},
+          { titre: "Etapa 4", sousTitre: "Conversación – EO", ressources: [ ]},
+          { titre: "Etapa 5", sousTitre: "Evaluación 1 – EE", ressources: [ ]},
+          { titre: "Etapa 6", sousTitre: "CE", ressources: [ ]},
+          { titre: "Etapa 7", sousTitre: "CE-EO", ressources: [ ]},
+          { titre: "Etapa 8", sousTitre: "Evaluación 2 – Proyecto", ressources: [
+            { type: "grammaire", emoji: "🏠", titre: "Entrenamiento de gramática — indefinido, perfecto y conectores", lien: "docs/1-Premiere/1-S2/1e_S2_Entrenamiento_gramatica.html" },
+            { type: "flashcards", titre: "Flashcards sonores — vocabulaire de toute la séquence", lien: "docs/1-Premiere/1-S2/1e_S2_Flashcards_Vocabulario.html" }
           ]}
         ]},
       { id: "1-S3", emoji: "3️⃣", titre: "Séquence 3", sousTitre: "Titre à compléter", notions: [], etapas: [] },
