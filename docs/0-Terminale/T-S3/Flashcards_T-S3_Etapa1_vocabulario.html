@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Flashcards – Terminale S3 – Etapa 1 – Vocabulario</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;background:linear-gradient(135deg,#ff5fa2 0%,#ff8c1a 30%,#ffd34d 50%,#2a9d8f 75%,#1d70b8 100%);color:#20304a;display:flex;flex-direction:column;align-items:center;min-height:100%}
+header{width:100%;max-width:820px;padding:14px 14px 4px;text-align:center;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.35)}
+header h1{margin:0;font-size:1.45rem}
+header p{margin:4px 0 0;font-size:.95rem;opacity:.95}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 8px 4px}
+.tabs button,.tools button{border:0;border-radius:999px;padding:8px 14px;font:inherit;font-weight:700;cursor:pointer;background:rgba(255,255,255,.88);color:#20304a;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.tabs button.on{background:#20304a;color:#fff}
+.stage{width:100%;max-width:620px;padding:10px 14px;perspective:1400px}
+.card{position:relative;width:100%;height:min(56vh,380px);cursor:pointer;transition:transform .55s;transform-style:preserve-3d;-webkit-transform-style:preserve-3d}
+.card.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:24px;background:#fffdf7;box-shadow:0 12px 30px rgba(0,0,0,.28);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:6px solid #fff}
+.front{border-color:#ffd34d}
+.back{transform:rotateY(180deg);border-color:#2a9d8f;background:#f2fbf9}
+.tag{position:absolute;top:12px;left:16px;font-size:.8rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#8a6d1f}
+.back .tag{color:#1f6f66}
+.cat{position:absolute;top:12px;right:16px;font-size:.8rem;font-weight:700;color:#7a8597}
+.emo{font-size:clamp(3.6rem,13vw,5.6rem);line-height:1.1}
+.fr{font-size:clamp(1.4rem,5vw,2.1rem);font-weight:800;margin-top:10px}
+.es{font-size:clamp(1.6rem,6vw,2.5rem);font-weight:800;color:#1d5f58}
+.hint{position:absolute;bottom:12px;font-size:.85rem;color:#8a93a3}
+.spk{margin-top:16px;border:0;border-radius:999px;background:#2a9d8f;color:#fff;font:inherit;font-size:1.1rem;font-weight:700;padding:10px 20px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.2)}
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;margin:12px 0 4px}
+.nav button{width:62px;height:62px;border-radius:50%;border:0;font-size:1.7rem;background:#fff;color:#20304a;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.2)}
+.count{min-width:90px;text-align:center;font-weight:800;color:#fff;font-size:1.15rem;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+.bar{width:min(560px,90vw);height:8px;background:rgba(255,255,255,.45);border-radius:6px;overflow:hidden;margin:2px auto 8px}
+.bar i{display:block;height:100%;background:#20304a;transition:width .3s}
+.tools{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:4px 10px 18px}
+.tools button.on{background:#d9503c;color:#fff}
+.list{display:none;width:100%;max-width:820px;padding:0 12px 24px}
+.list.show{display:block}
+.list table{width:100%;border-collapse:separate;border-spacing:0 6px}
+.list td{background:#fffdf7;padding:9px 12px;font-size:1rem}
+.list td:first-child{border-radius:12px 0 0 12px;font-size:1.4rem;width:46px;text-align:center}
+.list td:last-child{border-radius:0 12px 12px 0;font-weight:700;color:#1d5f58;cursor:pointer}
+.list h3{color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.4);margin:14px 4px 2px}
+footer{color:#fff;font-size:.8rem;opacity:.9;padding-bottom:14px;text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <h1>🎨 El arte, ¿poder o contrapoder? – Etapa 1</h1>
+  <p>Terminale · Secuencia 3 · Vocabulario · Clique sur la carte pour la retourner et entendre le mot</p>
+</header>
+<div class="tabs" id="tabs"></div>
+<div class="stage">
+  <div class="card" id="card">
+    <div class="face front"><span class="tag">🇫🇷 Recto</span><span class="cat" id="catF"></span><div class="emo" id="emo"></div><div class="fr" id="fr"></div><span class="hint">👆 Clique pour voir l'espagnol</span></div>
+    <div class="face back"><span class="tag">🇪🇸 Verso</span><span class="cat" id="catB"></span><div class="emo" id="emo2"></div><div class="es" id="es"></div><button class="spk" id="spk">🔊 Escuchar</button><span class="hint">👆 Clique pour revenir au français</span></div>
+  </div>
+</div>
+<div class="nav"><button id="prev" aria-label="Carte précédente">◀</button><span class="count" id="count"></span><button id="next" aria-label="Carte suivante">▶</button></div>
+<div class="bar"><i id="bar"></i></div>
+<div class="tools">
+  <button id="shuffle">🔀 Mélanger</button>
+  <button id="order">🔢 Remettre dans l'ordre</button>
+  <button id="side">🇪🇸 Commencer par l'espagnol</button>
+  <button id="auto" class="on">🔊 Son automatique : oui</button>
+  <button id="showList">📋 Voir toute la liste</button>
+</div>
+<div class="list" id="list"></div>
+<footer>Astuce : flèches ◀ ▶ du clavier pour changer de carte, barre d'espace pour retourner.</footer>
+<script>
+"use strict";
+var CARDS = [
+  {c:"Verbos", e:"🖌️", fr:"peindre", es:"pintar"},
+  {c:"Verbos", e:"👉", fr:"montrer", es:"mostrar (ue)", say:"mostrar"},
+  {c:"Verbos", e:"🎭", fr:"représenter", es:"representar"},
+  {c:"Verbos", e:"🗯️", fr:"critiquer", es:"criticar"},
+  {c:"Verbos", e:"🎖️", fr:"rendre hommage", es:"rendir homenaje"},
+  {c:"Verbos", e:"🔄", fr:"réinterpréter", es:"reinterpretar"},
+  {c:"Palabras útiles", e:"⚡", fr:"le pouvoir", es:"el poder"},
+  {c:"Palabras útiles", e:"🏰", fr:"la monarchie", es:"la monarquía"},
+  {c:"Palabras útiles", e:"🤴👧", fr:"le roi / l'infante", es:"el rey / la infanta", say:"el rey, la infanta"},
+  {c:"Palabras útiles", e:"👑", fr:"la cour", es:"la corte"},
+  {c:"Palabras útiles", e:"👨‍🎨", fr:"le peintre", es:"el pintor"},
+  {c:"Palabras útiles", e:"🖼️", fr:"un portrait officiel", es:"un retrato oficial"},
+  {c:"Palabras útiles", e:"💎", fr:"la richesse / le luxe", es:"la riqueza / el lujo", say:"la riqueza, el lujo"},
+  {c:"Palabras útiles", e:"📢", fr:"la propagande", es:"la propaganda"},
+  {c:"Palabras útiles", e:"☝️", fr:"la dénonciation", es:"la denuncia"},
+  {c:"Palabras útiles", e:"⚔️", fr:"le champ de bataille", es:"el campo de batalla"},
+  {c:"Palabras útiles", e:"🛒", fr:"la société de consommation", es:"la sociedad de consumo"},
+  {c:"Palabras útiles", e:"🥫", fr:"le pop art", es:"el arte pop"},
+  {c:"Palabras útiles", e:"😏", fr:"l'ironie", es:"la ironía"},
+  {c:"Palabras útiles", e:"💬", fr:"le message", es:"el mensaje"},
+  {c:"Palabras útiles", e:"🪞", fr:"le miroir", es:"el espejo"},
+  {c:"Palabras útiles", e:"🐕", fr:"le chien", es:"el perro"},
+  {c:"Los posesivos", e:"👤", fr:"son, sa, ses / leur(s)", es:"su / sus", say:"su, sus"},
+  {c:"Los posesivos", e:"👥", fr:"notre, nos", es:"nuestro / nuestra / nuestros / nuestras", say:"nuestro, nuestra, nuestros, nuestras"},
+  {c:"Los posesivos", e:"⏳", fr:"à son époque", es:"en su época"}
+];
+var CATS = ["Tout", "Verbos", "Palabras útiles", "Los posesivos"];
+var CAT_FR = {"Tout":"🗂️ Tout (" + CARDS.length + ")", "Verbos":"🏃 Verbos", "Palabras útiles":"📚 Palabras útiles", "Los posesivos":"👤 Los posesivos"};
+var state = {cat:"Tout", deck:[], i:0, flipped:false, esFirst:false, auto:true};
+function $(id){ return document.getElementById(id); }
+
+/* ---- voix espagnole (hispano-américaine en priorité, sinon d'Espagne) ---- */
+var voice = null;
+function pickVoice(){
+  if (!window.speechSynthesis) return;
+  var vs = speechSynthesis.getVoices(); if (!vs.length) return;
+  var pref = ["es-MX","es-US","es-419","es-CO","es-AR","es-CL","es-ES","es"];
+  for (var p = 0; p < pref.length; p++) {
+    for (var k = 0; k < vs.length; k++) {
+      var l = (vs[k].lang || "").replace("_","-");
+      if (l.toLowerCase().indexOf(pref[p].toLowerCase()) === 0) { voice = vs[k]; return; }
+    }
+  }
+}
+if (window.speechSynthesis) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+function speak(t){
+  if (!window.speechSynthesis) return;
+  try {
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(t);
+    if (!voice) pickVoice();
+    if (voice) { u.voice = voice; u.lang = voice.lang; } else u.lang = "es-MX";
+    u.rate = 0.85; speechSynthesis.speak(u);
+  } catch (e) {}
+}
+function sayOf(c){ return c.say || c.es.replace(/\s*\(.*?\)/g, ""); }
+
+/* ---- paquet de cartes ---- */
+function build(shuffle){
+  var d = [];
+  for (var k = 0; k < CARDS.length; k++) if (state.cat === "Tout" || CARDS[k].c === state.cat) d.push(k);
+  if (shuffle) for (var j = d.length - 1; j > 0; j--) { var r = Math.floor(Math.random() * (j + 1)); var t = d[j]; d[j] = d[r]; d[r] = t; }
+  state.deck = d; state.i = 0; state.flipped = state.esFirst; render(false);
+}
+function render(sound){
+  var c = CARDS[state.deck[state.i]];
+  $("emo").textContent = c.e; $("emo2").textContent = c.e;
+  $("fr").textContent = c.fr; $("es").textContent = c.es;
+  $("catF").textContent = c.c; $("catB").textContent = c.c;
+  $("card").className = "card" + (state.flipped ? " flip" : "");
+  $("count").textContent = (state.i + 1) + " / " + state.deck.length;
+  $("bar").style.width = ((state.i + 1) / state.deck.length * 100) + "%";
+  if (sound && state.auto && state.flipped) speak(sayOf(c));
+}
+function flip(){ state.flipped = !state.flipped; render(true); }
+function go(d){
+  state.i = (state.i + d + state.deck.length) % state.deck.length;
+  state.flipped = state.esFirst; render(state.esFirst);
+}
+$("card").onclick = flip;
+$("spk").onclick = function(ev){ ev.stopPropagation(); speak(sayOf(CARDS[state.deck[state.i]])); };
+$("prev").onclick = function(){ go(-1); };
+$("next").onclick = function(){ go(1); };
+$("shuffle").onclick = function(){ build(true); };
+$("order").onclick = function(){ build(false); };
+$("side").onclick = function(){
+  state.esFirst = !state.esFirst;
+  this.textContent = state.esFirst ? "🇫🇷 Commencer par le français" : "🇪🇸 Commencer par l'espagnol";
+  state.flipped = state.esFirst; render(state.esFirst);
+};
+$("auto").onclick = function(){
+  state.auto = !state.auto; this.className = state.auto ? "on" : "";
+  this.textContent = "🔊 Son automatique : " + (state.auto ? "oui" : "non");
+};
+$("showList").onclick = function(){
+  var L = $("list"), on = !L.classList.contains("show");
+  L.classList.toggle("show", on); this.textContent = on ? "📋 Cacher la liste" : "📋 Voir toute la liste";
+  if (on) L.scrollIntoView({behavior:"smooth"});
+};
+document.addEventListener("keydown", function(e){
+  if (e.key === "ArrowRight") go(1);
+  else if (e.key === "ArrowLeft") go(-1);
+  else if (e.key === " " || e.key === "Enter") { e.preventDefault(); flip(); }
+});
+/* balayage sur tablette */
+var x0 = null;
+$("card").addEventListener("touchstart", function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+$("card").addEventListener("touchend", function(e){
+  if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; x0 = null;
+  if (Math.abs(dx) > 60) { e.preventDefault(); go(dx < 0 ? 1 : -1); }
+});
+
+/* onglets et liste complète */
+(function(){
+  var T = $("tabs");
+  CATS.forEach(function(k){
+    var b = document.createElement("button"); b.textContent = CAT_FR[k]; if (k === "Tout") b.className = "on";
+    b.onclick = function(){ var all = T.querySelectorAll("button"); for (var i = 0; i < all.length; i++) all[i].className = ""; b.className = "on"; state.cat = k; build(false); };
+    T.appendChild(b);
+  });
+  var h = "";
+  CATS.slice(1).forEach(function(k){
+    h += "<h3>" + CAT_FR[k] + "</h3><table>";
+    CARDS.forEach(function(c, i){ if (c.c === k) h += "<tr><td>" + c.e + "</td><td>" + c.fr + "</td><td data-i='" + i + "'>🔊 " + c.es + "</td></tr>"; });
+    h += "</table>";
+  });
+  $("list").innerHTML = h;
+  $("list").onclick = function(e){ var td = e.target.closest ? e.target.closest("td[data-i]") : null; if (td) speak(sayOf(CARDS[+td.getAttribute("data-i")])); };
+})();
+build(false);
+</script>
+</body>
+</html>
