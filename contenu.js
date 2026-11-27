@@ -7,7 +7,7 @@
 
 var SITE = {
   titre: "¡Español con el profe!",
-  sousTitre: "Les cours d'espagnol de M. Villarroel",
+  sousTitre: "Clases del Sr. Villarroel",
   // Laisser "" pour cacher un bouton
   liens: {
     ecoledirecte: "https://www.ecoledirecte.com",
