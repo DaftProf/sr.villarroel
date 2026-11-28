@@ -188,7 +188,7 @@ NIVEAUX = NIVEAUX.filter(function (n) { return !n.prof; });
     poserFil([[n.emoji + " " + n.nom, ""]]);
     app.innerHTML = '<form class="cadenas" id="form-code" style="--c:' + n.couleur + '" autocomplete="off">' +
       '<div class="gros">🔒</div><h1>' + n.emoji + " " + esc(n.nom) + "</h1>" +
-      "<p>Tape le code donné par ton professeur.</p>" +
+      (n.prof ? "<p>Espace réservé au professeur : tape ton code professeur.</p>" : "<p>Tape le code donné par ton professeur.</p>") +
       '<input id="champ-code" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Code" aria-label="Code d\'accès">' +
       '<button class="btn" type="submit">Entrer 🚪</button><div class="erreur" id="erreur"></div></form>';
     var champ = document.getElementById("champ-code");
