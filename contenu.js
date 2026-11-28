@@ -152,6 +152,7 @@ var NIVEAUX = [
             { type: "flashcards", titre: "Flashcards sonores — grammaire (estar + gérondif)", lien: "docs/4-Quatrieme/4-S3/E1-flashcards-grammaire.html" }
           ]},
           { titre: "Etapa 2", sousTitre: "La vidéo « Estar + gerundio »", ressources: [
+            { type: "co", titre: "Vidéo — Estar + gerundio (regulares)", lien: "docs/4-Quatrieme/4-S3/Estar%20%2B%20gerundio%20(regulares).%20Nivel%20A2.mp4" },
             { type: "flashcards", titre: "Flashcards sonores — vocabulaire", lien: "docs/4-Quatrieme/4-S3/E2-flashcards-vocabulaire.html" },
             { type: "flashcards", titre: "Flashcards sonores — grammaire (está / están + gérondif)", lien: "docs/4-Quatrieme/4-S3/E2-flashcards-grammaire.html" }
           ]}
