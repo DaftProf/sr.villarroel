@@ -11,7 +11,7 @@ var SITE = {
   // Laisser "" pour cacher un bouton
   liens: {
     ecoledirecte: "https://www.ecoledirecte.com",
-    youtube: "",          // lien de votre chaîne YouTube
+    youtube: "https://www.youtube.com/@Señor_Villarroel",          // lien de votre chaîne YouTube
     drive: "",            // lien d'un dossier Google Drive partagé
     kahoot: ""            // lien de votre page Kahoot
   },
@@ -28,7 +28,7 @@ var SITE = {
    --------------------------------------------------------------------- */
 var GRAMMAIRE = [
   { id: "presente", emoji: "⏰", titre: "El presente de indicativo", sousTitre: "Le présent", niveaux: ["5", "4"],
-    videos: [{ titre: "Le présent des verbes réguliers", youtube: "" }], fiche: "" },
+    videos: [{ titre: "Le présent des verbes réguliers (-AR, -ER, -IR)", youtube: "https://youtu.be/PausaCYhVwM" }], fiche: "" },
   { id: "ser-estar", emoji: "⚖️", titre: "Ser y estar", sousTitre: "Les deux verbes « être »", niveaux: ["5", "4"],
     videos: [{ titre: "Ser ou estar ?", youtube: "" }], fiche: "" },
   { id: "gustar", emoji: "❤️", titre: "Me gusta / me gustan", sousTitre: "Exprimer ses goûts", niveaux: ["5"],
