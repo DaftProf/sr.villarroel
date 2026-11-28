@@ -290,7 +290,11 @@ var NIVEAUX = [
     id: "P", prof: true, dossier: "Prof", nom: "Mes fiches interactives", sousTitre: "Fiches de classe à projeter", emoji: "🧑‍🏫", couleur: "#6D597A",
     code: "",
     sequences: [
-      { id: "P-5", emoji: "🌱", titre: "5ème", sousTitre: "Fiches interactives", notions: [], etapas: [] },
+      { id: "P-5", emoji: "🌱", titre: "5ème", sousTitre: "Fiches interactives", notions: [], etapas: [
+          { titre: "Séquence 3", sousTitre: "Fiche de grammaire — Navidad", ressources: [
+            { type: "jeu", emoji: "🖥️", titre: "Fiche de grammaire Navidad", lien: "docs/Prof/5e_S3G_Navidad_clase.html" }
+          ]}
+        ] },
       { id: "P-4", emoji: "🚀", titre: "4ème", sousTitre: "Fiches interactives", notions: [], etapas: [
           { titre: "Séquence 3", sousTitre: "¡Moviéndonos!", ressources: [
             { type: "jeu", emoji: "🖥️", titre: "Etapa 1 — CE-EE · Laura Vidra", lien: "docs/Prof/4e_S3_Etapa1_CE-EE_Laura_Vidra.html" },
