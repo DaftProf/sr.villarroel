@@ -1,3 +1,7 @@
+/* Espace prof : les niveaux marqués prof: true sont retirés de la liste des élèves */
+var NIVEAUX_PROF = NIVEAUX.filter(function (n) { return n.prof; });
+NIVEAUX = NIVEAUX.filter(function (n) { return !n.prof; });
+
 /* Fonctionnement du site — pas besoin de modifier ce fichier.
    Tout le contenu se trouve dans contenu.js */
 (function () {
@@ -50,6 +54,7 @@
   }
   function estOuvert(nivId) {
     var a = lireAcces();
+    if (trouver(NIVEAUX_PROF, nivId)) return a.indexOf("PROF") >= 0;
     return a.indexOf("PROF") >= 0 || a.indexOf(nivId) >= 0;
   }
   function majDeconnexion() {
@@ -119,6 +124,14 @@
         estOuvert(n.id) ? "🔓 Ouvert" : "🔒 Avec code", true);
     });
     h += "</div>";
+    if (NIVEAUX_PROF.length && lireAcces().indexOf("PROF") >= 0) {
+      h += "<h2>👨‍🏫 Espace prof</h2><p class='intro'>Visible seulement avec le code professeur : les élèves ne le voient pas.</p>";
+      h += '<div class="grille">';
+      NIVEAUX_PROF.forEach(function (n) {
+        h += tuile("#/niveau/" + n.id, n.emoji, n.nom, n.sousTitre || "", n.couleur, "👨‍🏫 Prof", true);
+      });
+      h += "</div>";
+    }
     app.innerHTML = h;
   }
 
@@ -269,7 +282,7 @@
     if (!morceaux.length) return pageAccueil();
     if (morceaux[0] === "grammaire") return morceaux[1] ? pageNotion(morceaux[1]) : pageGrammaire();
     if (morceaux[0] === "niveau") {
-      var n = trouver(NIVEAUX, morceaux[1]);
+      var n = trouver(NIVEAUX.concat(NIVEAUX_PROF), morceaux[1]);
       if (!n) return pageIntrouvable();
       if (!estOuvert(n.id)) return pageCadenas(n);
       if (!morceaux[2]) return pageNiveau(n);

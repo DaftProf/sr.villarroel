@@ -282,5 +282,16 @@ var NIVEAUX = [
       { id: "B-S5", emoji: "5️⃣", titre: "Module 5", sousTitre: "Titre à compléter", notions: [], etapas: [] },
       { id: "B-S6", emoji: "6️⃣", titre: "Module 6", sousTitre: "Titre à compléter", notions: [], etapas: [] }
     ]
+  },
+  {
+    id: "P", prof: true, dossier: "Prof", nom: "Mes fiches interactives", sousTitre: "Fiches de classe à projeter", emoji: "🧑‍🏫", couleur: "#6D597A",
+    code: "",
+    sequences: [
+      { id: "P-5", emoji: "🌱", titre: "5ème", sousTitre: "Fiches interactives", notions: [], etapas: [] },
+      { id: "P-4", emoji: "🚀", titre: "4ème", sousTitre: "Fiches interactives", notions: [], etapas: [] },
+      { id: "P-1", emoji: "🎓", titre: "1ère", sousTitre: "Fiches interactives", notions: [], etapas: [] },
+      { id: "P-T", emoji: "🏅", titre: "Terminale", sousTitre: "Fiches interactives", notions: [], etapas: [] },
+      { id: "P-B", emoji: "💼", titre: "Bachelor", sousTitre: "Fiches interactives", notions: [], etapas: [] }
+    ]
   }
 ];
