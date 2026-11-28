@@ -233,6 +233,9 @@ var NIVEAUX = [
             { type: "jeu", emoji: "🏠", titre: "Entrenamiento en casa — grammaire, vocabulaire et phrases", lien: "docs/0-Terminale/T-S3/T_Etapa1_Entrenamiento_casa.html" },
             { type: "kahoot", titre: "Kahoot — Las Meninas y Equipo Crónica (jusqu'au 19/12)", lien: "https://kahoot.it/challenge/09490586?challenge-id=9d16cdf7-6170-47f4-863f-ed9e6700d129_1795799858890" },
             { type: "kahoot", titre: "Kahoot — Arte y poder: gramática (jusqu'au 19/12)", lien: "https://kahoot.it/challenge/09740849?challenge-id=9d16cdf7-6170-47f4-863f-ed9e6700d129_1795800147351" }
+          ]},
+          { titre: "Etapa 2", sousTitre: "El muralismo mexicano", ressources: [
+            { type: "co", titre: "Vidéo — El muralismo mexicano", lien: "docs/0-Terminale/T-S3/El%20muralismo%20mexicano.mp4" }
           ]}
         ]},
       { id: "T-S4", emoji: "4️⃣", titre: "Séquence 4", sousTitre: "Titre à compléter", notions: [], etapas: [] },
