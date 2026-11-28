@@ -11,6 +11,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0B2545">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="¡Español!">
 </head>
 <body>
   <header class="entete">
@@ -67,5 +71,6 @@
     function majBanniere() { var b = document.getElementById("banniere"); if (b) b.style.display = (location.hash.replace(/^#\/?/, "") === "") ? "" : "none"; }
     window.addEventListener("hashchange", majBanniere); majBanniere();
   </script>
+  <script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");</script>
 </body>
 </html>
