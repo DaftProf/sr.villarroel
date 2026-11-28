@@ -299,3 +299,15 @@
   });
   afficher();
 })();
+
+/* Drapeaux : nom du pays au survol (ou au toucher sur iPad / téléphone) — bandera-nom */
+(function () {
+  var imgs = document.querySelectorAll(".banderas img");
+  for (var i = 0; i < imgs.length; i++) {
+    var img = imgs[i], s = document.createElement("span");
+    s.className = "bandera"; s.tabIndex = 0;
+    s.setAttribute("data-nom", img.getAttribute("title") || img.getAttribute("alt") || "");
+    img.removeAttribute("title");
+    img.parentNode.insertBefore(s, img); s.appendChild(img);
+  }
+})();

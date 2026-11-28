@@ -43,7 +43,11 @@ button { font: inherit; cursor: pointer; }
 /* Bandeau des drapeaux hispanophones */
 .banderas { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; padding: 10px 14px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
 .banderas img { height: 24px; width: auto; border-radius: 4px; box-shadow: 0 0 0 1px rgba(0,0,0,.12); transition: transform .12s ease; }
-.banderas img:hover { transform: scale(1.25); }
+.banderas { position: relative; z-index: 5; }
+.bandera { position: relative; display: inline-block; line-height: 0; outline: none; cursor: default; }
+.bandera:hover img, .bandera:focus img { transform: scale(1.8); position: relative; z-index: 2; box-shadow: 0 3px 10px rgba(0,0,0,.3); }
+.bandera::after { content: attr(data-nom); position: absolute; left: 50%; top: calc(100% + 12px); transform: translateX(-50%); background: #0B2545; color: #fff; font-size: 12px; font-weight: 700; line-height: 1.2; padding: 4px 8px; border-radius: 6px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .12s ease; z-index: 3; }
+.bandera:hover::after, .bandera:focus::after { opacity: 1; }
 @media (max-width: 560px) { .banderas { gap: 5px; padding: 8px; } .banderas img { height: 17px; } }
 
 /* Fil d'Ariane */
