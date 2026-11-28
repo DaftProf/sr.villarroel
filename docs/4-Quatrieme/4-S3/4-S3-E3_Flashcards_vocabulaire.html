@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>¡Moviéndonos! – Etapa 3 – Vocabulaire</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#fdf6ec;color:#2b2b2b;min-height:100vh;display:flex;flex-direction:column;align-items:center}
+header{width:100%;background:#c0392b;color:#fff;text-align:center;padding:14px 10px 12px}
+header h1{margin:0;font-size:1.35rem}
+header p{margin:4px 0 0;font-size:.95rem;opacity:.9}
+.bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:14px 10px 4px}
+select,button{font:inherit;font-size:1rem;border-radius:12px;border:2px solid #c0392b;padding:9px 14px;background:#fff;color:#c0392b;cursor:pointer}
+button.main{background:#c0392b;color:#fff}
+button:active{transform:scale(.96)}
+#count{font-weight:bold;margin:6px 0;color:#7a4b00}
+#card{width:min(92vw,560px);min-height:300px;margin:6px 10px;border-radius:22px;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.15);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:26px 20px;cursor:pointer;user-select:none;-webkit-user-select:none;position:relative;transition:transform .18s ease,background .18s ease}
+#card.back{background:#fff4d6}
+#card.flip{transform:scale(.94)}
+#sec{position:absolute;top:12px;left:0;right:0;font-size:.8rem;color:#999;text-transform:uppercase;letter-spacing:.05em;padding:0 14px}
+#side{position:absolute;bottom:10px;left:0;right:0;font-size:.8rem;color:#aaa}
+#emoji{font-size:4.2rem;line-height:1.1;margin-bottom:10px}
+#text{font-size:1.75rem;font-weight:600;line-height:1.3}
+#hint{font-size:1.05rem;color:#777;margin-top:10px;font-style:italic}
+#card.back #text{color:#b03a2e}
+.nav{display:flex;gap:10px;justify-content:center;margin:12px 0 26px;flex-wrap:wrap}
+.nav button{min-width:120px}
+#flag{font-size:.85rem;color:#888;margin-top:2px;text-align:center;padding:0 10px}
+</style>
+</head>
+<body>
+<header><h1>¡Moviéndonos! – Etapa 3 – Vocabulaire</h1><p>4ème · Séquence 3 · Etapa 3 · La agenda de Rosita</p></header>
+<div class="bar">
+  <select id="filter"></select>
+  <button id="shuffle">🔀 Mélanger</button>
+  <button id="order">🔢 Remettre dans l'ordre</button>
+</div>
+<div id="count"></div>
+<div id="card" role="button" aria-label="Retourner la carte">
+  <div id="sec"></div>
+  <div id="emoji"></div>
+  <div id="text"></div>
+  <div id="hint"></div>
+  <div id="side"></div>
+</div>
+<div class="nav">
+  <button id="prev">⬅️ Précédente</button>
+  <button id="listen" class="main">🔊 Écouter</button>
+  <button id="next">Suivante ➡️</button>
+</div>
+<div id="flag">Touche la carte pour la retourner · Glisse à gauche ou à droite pour changer de carte</div>
+<script>
+var CARDS = [{"s": "Verbos", "e": "🛏️", "fr": "se lever", "es": "levantarse", "h": "", "hb": ""}, {"s": "Verbos", "e": "🥐", "fr": "prendre le petit-déjeuner", "es": "desayunar", "h": "", "hb": ""}, {"s": "Verbos", "e": "🏫", "fr": "aller en cours", "es": "ir a clase", "h": "", "hb": ""}, {"s": "Verbos", "e": "🏠", "fr": "rentrer à la maison", "es": "volver a casa", "h": "", "hb": ""}, {"s": "Verbos", "e": "🍪", "fr": "goûter", "es": "merendar", "h": "", "hb": ""}, {"s": "Verbos", "e": "🌙", "fr": "se coucher", "es": "acostarse", "h": "", "hb": ""}, {"s": "Para preguntar y responder", "e": "❓", "fr": "Que fais-tu (en ce moment) ?", "es": "¿Qué estás haciendo?", "h": "", "hb": ""}, {"s": "Para preguntar y responder", "e": "🕗", "fr": "à huit heures", "es": "a las ocho", "h": "", "hb": ""}, {"s": "Para preguntar y responder", "e": "🕣", "fr": "et quart", "es": "y cuarto", "h": "", "hb": ""}, {"s": "Para preguntar y responder", "e": "🕤", "fr": "et demie", "es": "y media", "h": "", "hb": ""}, {"s": "Para preguntar y responder", "e": "🛏️", "fr": "Je suis en train de me lever.", "es": "Me estoy levantando.", "h": "", "hb": ""}, {"s": "Para preguntar y responder", "e": "🛏️", "fr": "Je suis en train de me lever. (2e façon)", "es": "Estoy levantándome.", "h": "", "hb": ""}, {"s": "Para preguntar y responder", "e": "📒", "fr": "l'agenda", "es": "la agenda", "h": "", "hb": ""}];
+var deck = [], pos = 0, showBack = false, esVoice = null;
+
+function pickVoice(){
+  if(!window.speechSynthesis) return;
+  var v = speechSynthesis.getVoices(), pref = ["es-ES","es-MX","es-US","es-419"];
+  for(var p=0;p<pref.length;p++){
+    for(var i=0;i<v.length;i++){ if(v[i].lang.replace("_","-")===pref[p]){ esVoice=v[i]; return; } }
+  }
+  for(var j=0;j<v.length;j++){ if(v[j].lang.toLowerCase().indexOf("es")===0){ esVoice=v[j]; return; } }
+}
+if(window.speechSynthesis){ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+
+function speak(t){
+  if(!window.speechSynthesis) return;
+  speechSynthesis.cancel();
+  var clean = t.replace(/\s*[\/→=]\s*/g, ", ").replace(/[«»—]/g, "");
+  var u = new SpeechSynthesisUtterance(clean);
+  u.lang = esVoice ? esVoice.lang : "es-ES";
+  if(esVoice) u.voice = esVoice;
+  u.rate = 0.85;
+  speechSynthesis.speak(u);
+}
+
+function buildFilter(){
+  var f = document.getElementById("filter"), seen = [];
+  f.innerHTML = '<option value="">📚 Toutes les cartes ('+CARDS.length+')</option>';
+  CARDS.forEach(function(c){ if(seen.indexOf(c.s)<0) seen.push(c.s); });
+  seen.forEach(function(s){
+    var n = CARDS.filter(function(c){return c.s===s;}).length;
+    var o = document.createElement("option"); o.value = s; o.textContent = s+" ("+n+")"; f.appendChild(o);
+  });
+}
+function resetDeck(){
+  var s = document.getElementById("filter").value;
+  deck = CARDS.filter(function(c){ return !s || c.s===s; });
+  pos = 0; showBack = false; render();
+}
+function render(){
+  var c = deck[pos], card = document.getElementById("card");
+  document.getElementById("count").textContent = "Carte "+(pos+1)+" / "+deck.length;
+  document.getElementById("sec").textContent = c.s;
+  document.getElementById("emoji").textContent = c.e;
+  if(showBack){
+    card.className = "back";
+    document.getElementById("text").textContent = c.es;
+    document.getElementById("hint").textContent = c.hb || "";
+    document.getElementById("side").textContent = "🇪🇸 Español";
+  } else {
+    card.className = "";
+    document.getElementById("text").textContent = c.fr;
+    document.getElementById("hint").textContent = c.h || "";
+    document.getElementById("side").textContent = "🇫🇷 Français";
+  }
+}
+function flip(){
+  var card = document.getElementById("card");
+  card.classList.add("flip");
+  var toBack = !showBack; if(toBack) speak(deck[pos].es); /* iPad/iPhone : la voix doit partir directement au toucher */
+  setTimeout(function(){ showBack = toBack; render(); }, 140);
+}
+function go(d){ pos = (pos + d + deck.length) % deck.length; showBack = false; if(window.speechSynthesis) speechSynthesis.cancel(); render(); }
+
+document.getElementById("card").addEventListener("click", flip);
+document.getElementById("next").addEventListener("click", function(){ go(1); });
+document.getElementById("prev").addEventListener("click", function(){ go(-1); });
+document.getElementById("listen").addEventListener("click", function(){ if(!showBack){ showBack = true; render(); } speak(deck[pos].es); });
+document.getElementById("filter").addEventListener("change", resetDeck);
+document.getElementById("order").addEventListener("click", resetDeck);
+document.getElementById("shuffle").addEventListener("click", function(){
+  for(var i=deck.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=deck[i]; deck[i]=deck[j]; deck[j]=t; }
+  pos = 0; showBack = false; render();
+});
+document.addEventListener("keydown", function(e){
+  if(e.target.tagName==="SELECT") return;
+  if(e.key===" "||e.key==="Enter"){ e.preventDefault(); flip(); }
+  else if(e.key==="ArrowRight") go(1);
+  else if(e.key==="ArrowLeft") go(-1);
+});
+var sx = null;
+document.getElementById("card").addEventListener("touchstart", function(e){ sx = e.changedTouches[0].clientX; }, {passive:true});
+document.getElementById("card").addEventListener("touchend", function(e){
+  if(sx===null) return; var dx = e.changedTouches[0].clientX - sx; sx = null;
+  if(Math.abs(dx) > 50){ e.preventDefault(); go(dx < 0 ? 1 : -1); }
+});
+buildFilter(); resetDeck();
+</script>
+</body>
+</html>
