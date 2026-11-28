@@ -189,7 +189,7 @@ NIVEAUX = NIVEAUX.filter(function (n) { return !n.prof; });
     app.innerHTML = '<form class="cadenas" id="form-code" style="--c:' + n.couleur + '" autocomplete="off">' +
       '<div class="gros">🔒</div><h1>' + n.emoji + " " + esc(n.nom) + "</h1>" +
       (n.prof ? "<p>Espace réservé au professeur : tape ton code professeur.</p>" : "<p>Tape le code donné par ton professeur.</p>") +
-      '<input id="champ-code" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Code" aria-label="Code d\'accès">' +
+      '<input id="champ-code" type="password" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Code" aria-label="Code d\'accès">' +
       '<button class="btn" type="submit">Entrer 🚪</button><div class="erreur" id="erreur"></div></form>';
     var champ = document.getElementById("champ-code");
     try { champ.focus(); } catch (e) {}
@@ -214,10 +214,12 @@ NIVEAUX = NIVEAUX.filter(function (n) { return !n.prof; });
 
   function pageNiveau(n) {
     poserFil([[n.emoji + " " + n.nom, ""]]);
-    var h = '<div class="titre-page"><span class="gros">' + n.emoji + "</span><div><h1>Espagnol — " + esc(n.nom) + "</h1><p>Choisis ta séquence.</p></div></div>";
+    var h = '<div class="titre-page"><span class="gros">' + n.emoji + "</span><div><h1>Espagnol — " + esc(n.nom) + "</h1><p>" + (n.prof ? "Choisis un niveau." : "Choisis ta séquence.") + "</p></div></div>";
     h += '<div class="grille">';
-    n.sequences.forEach(function (s) {
-      h += tuile("#/niveau/" + n.id + "/" + s.id, s.emoji || "📘", s.titre, s.sousTitre, n.couleur, (s.etapas.length ? s.etapas.length + " étapa" + (s.etapas.length > 1 ? "s" : "") : "⏳ Bientôt"), true);
+    (n.prof ? n.sequences.filter(function (s) { return s.etapas.length; }) : n.sequences).forEach(function (s) {
+      var nbF = 0; s.etapas.forEach(function (e) { nbF += (e.ressources || []).length; });
+      var badge = n.prof ? nbF + " fiche" + (nbF > 1 ? "s" : "") : (s.etapas.length ? s.etapas.length + " étapa" + (s.etapas.length > 1 ? "s" : "") : "⏳ Bientôt");
+      h += tuile("#/niveau/" + n.id + "/" + s.id, s.emoji || "📘", s.titre, s.sousTitre, n.couleur, badge, true);
     });
     h += "</div>";
     if (!n.sequences.length) h += '<p class="vide">Les séquences arrivent bientôt.</p>';
@@ -242,7 +244,7 @@ NIVEAUX = NIVEAUX.filter(function (n) { return !n.prof; });
         '<span class="nb">' + (e.ressources || []).map(function (r) { return (TYPES[r.type] || TYPES.lien).emoji; }).join(" ") + "</span></a>";
     });
     h += "</div>";
-    if (!s.etapas.length) h += '<p class="vide">⏳ Les étapas de cette séquence arrivent bientôt.</p>';
+    if (!s.etapas.length && !n.prof) h += '<p class="vide">⏳ Les étapas de cette séquence arrivent bientôt.</p>';
     var notions = (s.notions || []).map(function (id) { return trouver(GRAMMAIRE, id); }).filter(Boolean);
     if (notions.length) {
       h += "<h2>🎬 Grammaire de la séquence</h2><div class='grille'>";

@@ -287,10 +287,27 @@ var NIVEAUX = [
     id: "P", prof: true, dossier: "Prof", nom: "Mes fiches interactives", sousTitre: "Fiches de classe à projeter", emoji: "🧑‍🏫", couleur: "#6D597A",
     code: "",
     sequences: [
-      { id: "P-5", emoji: "🌱", titre: "5ème", sousTitre: "Fiches interactives", notions: [], etapas: [] },
-      { id: "P-4", emoji: "🚀", titre: "4ème", sousTitre: "Fiches interactives", notions: [], etapas: [] },
+      { id: "P-5", emoji: "🌱", titre: "5ème", sousTitre: "Fiches interactives", notions: [], etapas: [
+          { titre: "Séquence 3", sousTitre: "Fiche de grammaire — Navidad", ressources: [
+            { type: "jeu", emoji: "🖥️", titre: "Fiche de grammaire Navidad — version classe", lien: "docs/Prof/5e_S3G_Navidad_clase.html" },
+            { type: "jeu", emoji: "🖥️", titre: "Fiche de grammaire Navidad — version interactive", lien: "docs/Prof/5e_S3G_Navidad_interactiva.html" }
+          ]}
+        ] },
+      { id: "P-4", emoji: "🚀", titre: "4ème", sousTitre: "Fiches interactives", notions: [], etapas: [
+          { titre: "Séquence 3", sousTitre: "¡Moviéndonos!", ressources: [
+            { type: "jeu", emoji: "🖥️", titre: "Etapa 1 — CE-EE · Laura Vidra", lien: "docs/Prof/4e_S3_Etapa1_CE-EE_Laura_Vidra.html" },
+            { type: "jeu", emoji: "🖥️", titre: "Etapa 2 — CO · Estar + gerundio", lien: "docs/Prof/4e_S3_Etapa2_CO_Estar_gerundio.html" },
+            { type: "jeu", emoji: "🖥️", titre: "Etapa 3 — EE · La agenda de Rosita", lien: "docs/Prof/4e_S3_Etapa3_EE_Agenda_Rosita.html" }
+          ]}
+        ] },
       { id: "P-1", emoji: "🎓", titre: "1ère", sousTitre: "Fiches interactives", notions: [], etapas: [] },
-      { id: "P-T", emoji: "🏅", titre: "Terminale", sousTitre: "Fiches interactives", notions: [], etapas: [] },
+      { id: "P-T", emoji: "🏅", titre: "Terminale", sousTitre: "Fiches interactives", notions: [], etapas: [
+          { titre: "Séquence 3", sousTitre: "El arte, ¿poder o contrapoder?", ressources: [
+            { type: "jeu", emoji: "🖥️", titre: "Etapa 1 — EE · Las Meninas y Equipo Crónica", lien: "docs/Prof/T_Etapa1_EE_Meninas_Cronica.html" },
+            { type: "jeu", emoji: "🖥️", titre: "Etapa 2 — CO · El muralismo mexicano", lien: "docs/Prof/T_Etapa2_CO_Muralismo.html" },
+            { type: "jeu", emoji: "🖥️", titre: "Etapa 3 — CE-EO · El mural de Ciudad Lineal", lien: "docs/Prof/T_Etapa3_CE-EO_Mural_Ciudad_Lineal.html" }
+          ]}
+        ] },
       { id: "P-B", emoji: "💼", titre: "Bachelor", sousTitre: "Fiches interactives", notions: [], etapas: [] }
     ]
   }
