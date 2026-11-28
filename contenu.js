@@ -240,8 +240,8 @@ var NIVEAUX = [
             { type: "flashcards", titre: "Flashcards sonores — grammaire", lien: "docs/0-Terminale/T-S3/Flashcards_T-S3_gramatica.html" },
             { type: "kahoot", titre: "Kahoot — El muralismo mexicano (jusqu'au 19/12)", lien: "https://kahoot.it/challenge/06892810?challenge-id=9d16cdf7-6170-47f4-863f-ed9e6700d129_1795867696881" }
           ]},
-          { titre: "Etapa 3", sousTitre: "El mural de Ciudad Lineal", ressources: [
-            { type: "kahoot", titre: "Kahoot — El mural de Ciudad Lineal (jusqu'au 19/12)", lien: "https://kahoot.it/challenge/09095423?challenge-id=9d16cdf7-6170-47f4-863f-ed9e6700d129_1795871443649" }
+          { titre: "Etapa 3", sousTitre: "El mural feminista de Ciudad Lineal", ressources: [
+            { type: "kahoot", titre: "Kahoot — El mural feminista de Ciudad Lineal (jusqu'au 19/12)", lien: "https://kahoot.it/challenge/02799213?challenge-id=9d16cdf7-6170-47f4-863f-ed9e6700d129_1795871605590" }
           ]}
         ]},
       { id: "T-S4", emoji: "4️⃣", titre: "Séquence 4", sousTitre: "Titre à compléter", notions: [], etapas: [] },
