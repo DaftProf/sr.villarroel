@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terminale – Etapa 3 – CE-EO – El mural de Ciudad Lineal</title>
+<style>
+:root{--red:#7a1f2b;--gold:#e6c34a;--ok:#1d8a3a;--ko:#c62828;--blue:#2c5d8a;--gramB:#5b2a86}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Microsoft New Tai Lue","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;background:#f4f1ea;color:#222;line-height:1.45}
+header{background:var(--red);color:#fff;padding:12px 18px;text-align:center}
+header h1{margin:0;font-size:1.35rem}
+header p{margin:3px 0 0}
+.layout{max-width:1300px;margin:0 auto;padding:10px 12px 40px;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.side{position:static!important;order:-1}}
+section{background:#fff;border-radius:12px;padding:14px 16px;margin:0 0 16px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+h2{margin:0 0 8px;font-size:1.15rem;color:var(--red);border-bottom:2px solid var(--gold);padding-bottom:4px}
+.tarea{display:flex;gap:10px;border:1px solid #e2c87a;border-radius:8px;overflow:hidden}
+.tarea b.t{background:#fdf0c8;padding:8px 10px;white-space:nowrap}
+.tarea span{padding:8px 10px}
+.ej{border-left:4px solid var(--blue);background:#f1f6fb;padding:6px 10px;margin:10px 0;font-style:italic}
+.ej b{color:var(--red)}
+.obras{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+.obras figure{margin:0;flex:1 1 280px;max-width:430px;text-align:center}
+.obras img{width:100%;border-radius:6px;box-shadow:0 1px 5px rgba(0,0,0,.25)}
+.obras figcaption{font-size:13px;color:#555;font-style:italic;margin-top:4px}
+/* gramática */
+.gram{border:2px solid #d6c9ea;background:#faf7ff}
+.gram h2{color:var(--gramB);border-bottom-color:#d6c9ea}
+.gram h3{margin:16px 0 5px;color:var(--gramB);font-size:1.02rem}
+.gram ul{margin:4px 0;padding-left:22px}.gram li{margin:3px 0}
+.gtab{border-collapse:collapse;margin:6px 0;background:#fff;font-size:.95rem}
+.gtab th,.gtab td{border:1px solid #d6c9ea;padding:4px 9px;text-align:left}
+.gtab th{background:#ece3f7}
+.warn{background:#fff4e0;border-radius:6px;padding:5px 9px;margin:6px 0}
+/* side boxes */
+.side{position:sticky;top:10px}
+.box{background:#fff;border-radius:12px;padding:12px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.box h3{margin:0 0 6px;font-size:1.02rem}
+.vbox{border:3px dashed var(--gold)}
+.vbox h3{color:var(--red)}
+.gbox{border:3px solid #d6c9ea}
+.gbox h3{color:var(--gramB)}
+#drop{min-height:90px;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;padding:4px;border-radius:8px}
+#drop.over{background:#fff6d6}
+#drop .empty{color:#888;font-size:.9rem;font-style:italic}
+.chip{background:var(--red);color:#fff;border-radius:16px;padding:4px 6px 4px 10px;font-size:.95rem;display:inline-flex;align-items:center;gap:4px}
+.chip button{border:none;background:rgba(255,255,255,.25);color:#fff;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:13px;line-height:1}
+.gitem{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #eee}
+.gitem.zero .lbl{color:#999}
+.gitem select{font:inherit;font-size:.95rem;padding:2px 4px}
+.hint{font-size:.85rem;color:#666;margin:4px 0 0}
+/* vocabulario */
+.vcat{font-weight:bold;color:var(--red);margin:14px 0 6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:9px}
+.card{perspective:700px;height:92px;cursor:pointer;position:relative;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.card .in{position:relative;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.card .f,.card .b{position:absolute;inset:0;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6px;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.card .f{background:#fff;border:2px solid var(--gold)}
+.card .b{background:var(--red);color:#fff;transform:rotateY(180deg);font-weight:bold;font-size:1.05rem}
+.card .em{font-size:26px;line-height:1}
+.card .fr{font-size:.95rem;margin-top:4px}
+.card .b small{font-weight:normal;font-size:.8rem;opacity:.9;margin-top:3px}
+.card .add{position:absolute;top:4px;right:4px;z-index:3;border:none;border-radius:50%;width:26px;height:26px;background:var(--gold);color:#222;font-weight:bold;cursor:pointer;font-size:16px;line-height:1}
+.card.chosen .f{border-color:var(--ok);background:#eef9f0}
+.ghost{position:fixed;pointer-events:none;z-index:99;background:var(--red);color:#fff;border-radius:16px;padding:5px 12px;font-weight:bold;box-shadow:0 3px 10px rgba(0,0,0,.3)}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+.btn{font:inherit;cursor:pointer;border:none;border-radius:8px;padding:6px 12px;background:var(--red);color:#fff;touch-action:manipulation}
+.btn.sec{background:var(--gold);color:#222}.btn.ter{background:#ddd;color:#222}.btn.blue{background:var(--blue)}
+/* frases */
+.sent{border:1px dashed #b9a560;border-radius:10px;padding:10px;margin:12px 0;background:#fffdf5}
+.sent .top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.sent .num{font-weight:bold;color:var(--red)}
+.pista{display:none;background:#eef7ff;border-radius:6px;padding:5px 9px;margin:6px 0}
+.sent.show .pista{display:block}
+.slots{display:flex;flex-wrap:wrap;gap:6px;padding:8px 2px;border-bottom:2px solid #888;min-height:50px;margin:6px 0}
+.slot{min-width:46px;min-height:34px;border:2px dashed #bbb;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.slot.full{border:none}
+.bank{display:flex;flex-wrap:wrap;gap:6px;padding:6px 0}
+.w{color:#fff;border-radius:8px;padding:6px 11px;font-size:1rem;cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.bank .w{background:var(--blue)}
+.slot .w{background:#444}
+.slot .w.bad{background:var(--ko)}
+.sent.ok .slots{border-bottom-color:var(--ok);background:#e5f6e9}
+.sent.ok .slot .w{background:var(--ok)}
+.bravo{display:none;color:var(--ok);font-weight:bold}
+.sent.ok .bravo{display:block}
+.intro{margin:4px 0}
+/* trace */
+.trbox{border:2px solid var(--blue);border-radius:10px;padding:14px 18px;background:#fff;margin-top:8px}
+.trbox h3{margin:0 0 8px;color:var(--blue);font-size:1.05rem}
+.trbox p.tx{line-height:1.95;margin:0 0 12px;text-align:justify}
+.tv{background:#fff1a8;border-radius:3px;padding:0 2px;font-weight:bold}
+.tg0{border-bottom:3px solid #2e7dd7}.tg1{border-bottom:3px solid #d7432e}.tg2{border-bottom:3px solid #2ea44f}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:13.5px;margin:4px 0 10px}
+.legend span{padding:1px 6px}
+.check{font-size:14px;border-top:1px solid #e3e8f0;padding-top:8px;margin:0;padding-left:18px}
+.check li{margin:2px 0}
+.dossier{border:2px solid #e2d6f3}
+.kick{margin:0;color:#888;font-weight:bold;letter-spacing:.08em;font-size:.85rem}
+.dh{color:#6a1fa0;border-bottom:none;font-size:1.3rem}
+.tl{list-style:none;margin:8px 0;padding:0}
+.tl li{display:grid;grid-template-columns:120px 1fr;gap:14px;padding:0}
+.tl .dd{text-align:right;font-weight:bold;color:#6a1fa0;padding-top:8px}
+.tl .dt{cursor:pointer;border-left:3px solid #d9c7ef;padding:8px 6px 8px 16px;position:relative}
+.tl .dt::before{content:"";position:absolute;left:-8px;top:13px;width:13px;height:13px;border-radius:50%;background:#7b2cbf}
+.tl .dt:hover,.tl .dt.speaking{background:#f3ecfb}
+@media(max-width:700px){.tl li{grid-template-columns:1fr;gap:0}.tl .dd{text-align:left}}
+.vsrc{color:#555;font-size:.9rem;margin:6px 0 0}
+.trbox .tx p.rp{margin:0 0 8px;line-height:1.9}
+</style>
+</head>
+<body>
+<header>
+<h1>Etapa 3 – CE-EO</h1>
+<p>Terminale – Secuencia 3: El arte, ¿poder o contrapoder?</p>
+</header>
+<div class="layout">
+<main>
+
+<section>
+<h2>📰 La consigna</h2>
+<div class="tarea"><b class="t">🏠 Tarea en casa</b><span>Lee el dossier y escribe <b>dos preguntas</b> que un periodista podría hacer a Unlogic Crew en marzo de 2021.</span></div>
+<p style="margin:10px 0 0">En parejas, juntad vuestras preguntas y preparad la <b>entrevista</b>: un/a periodista y un miembro de <b>Unlogic Crew</b>. Explicad qué <b>ha pasado</b> con vuestro mural y cómo <b>era</b> el barrio cuando lo pintasteis. Utilizad el <b>perfecto</b>, el <b>imperfecto</b> y los <b>posesivos</b>. Presentáis la entrevista <b>oralmente</b>.</p>
+<p class="ej"><b>Ejemplo :</b> Este año, algunos políticos <b>han querido</b> borrar <b>nuestro</b> mural; en 2018, los vecinos nos <b>ayudaban</b> a pintarlo. <b>El nuestro</b> es un mural para todas.</p>
+</section>
+
+<section class="dossier">
+<p class="kick">DOSSIER · ARTE URBANO</p>
+<h2 class="dh">«La unión hace la fuerza»: el mural feminista de Ciudad Lineal (Madrid)</h2>
+<p class="intro">Touche un paragraphe pour l'entendre en espagnol.</p>
+<ul class="tl"><li><span class="dd">2018</span><span class="dt" data-say="1">El colectivo de artistas urbanos <b>Unlogic Crew</b> pinta, con los vecinos del barrio, un gran mural en la pared del polideportivo de La Concepción. Representa a <b>quince mujeres</b> de todo el mundo, entre ellas Frida Kahlo, Rosa Parks, Rigoberta Menchú, Nina Simone y Angela Davis.</span></li><li><span class="dd">21/01/2021</span><span class="dt" data-say="1">A petición de Vox, que considera que el mural tiene un «mensaje político», el PP y Ciudadanos aprueban en la Junta del distrito <b>borrarlo</b> y sustituirlo por un mural deportivo.</span></li><li><span class="dd">24/01/2021</span><span class="dt" data-say="1">Mujeres, hombres y niños del barrio se concentran delante del mural con el lema <b>«El mural no se toca»</b>.</span></li><li><span class="dd">26/01/2021</span><span class="dt" data-say="1">El Pleno del Ayuntamiento de Madrid vota <b>mantener</b> el mural. «La presión popular ha vuelto a hacer efecto», escribe el periódico <i>El Salto</i>.</span></li><li><span class="dd">08/03/2021</span><span class="dt" data-say="1">El Día Internacional de la Mujer, grupos de extrema derecha <b>cubren con pintura negra</b> las caras de las quince mujeres.</span></li><li><span class="dd">Agosto de 2021</span><span class="dt" data-say="1">Unlogic Crew termina la <b>restauración</b> del mural y lo protege con un barniz antigrafiti.</span></li></ul>
+<p class="vsrc"><i>Dossier elaborado a partir de El Salto (26/01/2021) y Público (28/08/2021).</i></p>
+</section>
+
+<section class="gram">
+<h2>🧩 Gramática exigida</h2>
+
+<h3>1. El pretérito perfecto → ce qui s'est passé cette année (on parle en mars 2021)</h3>
+<p>Dans l'interview, les faits de 2021 sont <b>récents</b> et liés au présent : <i>este año, este mes, hoy</i> → perfecto.<br>Formation : <b>haber</b> au présent + <b>participe passé</b>.</p>
+<table class="gtab">
+<tr><th>sujet</th><th>haber</th><th>exemple</th></tr>
+<tr><td>yo</td><td><b>he</b></td><td>He leído el dossier.</td></tr>
+<tr><td>tú</td><td><b>has</b></td><td>¿Has visto el mural?</td></tr>
+<tr><td>él / ella</td><td><b>ha</b></td><td>La presión popular <b>ha vuelto</b> a hacer efecto.</td></tr>
+<tr><td>nosotros/as</td><td><b>hemos</b></td><td><b>Hemos defendido</b> nuestro mural.</td></tr>
+<tr><td>vosotros/as</td><td><b>habéis</b></td><td>¿Cómo <b>habéis reaccionado</b>?</td></tr>
+<tr><td>ellos / ellas</td><td><b>han</b></td><td>Algunos políticos <b>han querido</b> borrarlo.</td></tr>
+</table>
+<p class="warn">⚠️ Participes irréguliers du dossier : volver → <b>vuelto</b> · cubrir → <b>cubierto</b> · hacer → <b>hecho</b> · decir → <b>dicho</b> · ver → <b>visto</b> · poner → <b>puesto</b>.<br>
+⚠️ Avec un pronom, il se place <b>devant haber</b> : <i>Lo <b>han</b> borrado</i> ; <i>Nos <b>hemos</b> concentrado</i>.</p>
+
+<h3>2. El imperfecto → comment était le quartier en 2018</h3>
+<p>On l'emploie pour <b>décrire</b> la situation passée ou une <b>habitude</b> : <i>Cuando lo pintamos, el barrio <b>era</b> tranquilo y los vecinos nos <b>ayudaban</b>.</i></p>
+<table class="gtab">
+<tr><th>sujet</th><th>-AR (ayudar)</th><th>-ER / -IR (querer)</th><th>ser</th></tr>
+<tr><td>nosotros/as</td><td>ayud<b>ábamos</b></td><td>quer<b>íamos</b></td><td><b>éramos</b></td></tr>
+<tr><td>ellos / ellas</td><td>ayud<b>aban</b></td><td>quer<b>ían</b></td><td><b>eran</b></td></tr>
+<tr><td>él / ella</td><td>ayud<b>aba</b></td><td>quer<b>ía</b></td><td><b>era</b></td></tr>
+</table>
+
+<h3>3. Los posesivos: adjetivos y pronombres</h3>
+<ul>
+<li><b>Adjectif</b> (devant le nom) : <i><b>nuestro</b> mural, <b>vuestra</b> obra, <b>su</b> mensaje</i>. Il s'accorde avec l'objet possédé : <i><b>nuestras</b> vecinas</i>.</li>
+<li><b>Pronom</b> (il remplace le nom) : <b>el mío / la mía</b> (le mien) · <b>el tuyo</b> · <b>el suyo / la suya</b> (le sien, le leur) · <b>el nuestro / la nuestra</b> · <b>el vuestro</b> · + <b>-s</b> au pluriel.<br><i>Nuestro mural es feminista; <b>el suyo</b> (= el de Vox) sería deportivo.</i></li>
+<li>Après <b>ser</b>, sans article : <i>Este mural es <b>nuestro</b></i> (il est à nous).</li>
+</ul>
+<p class="warn">⚠️ Dans l'interview, le journaliste vouvoie le collectif à la manière espagnole : <b>vosotros</b> → <i>vuestro mural, ¿habéis…?</i> Les artistes répondent avec <b>nosotros</b> → <i>nuestro mural, hemos…</i></p>
+</section>
+
+<section>
+<h2>🧱 Ordena la frase</h2>
+<p class="intro">Touche les mots dans le bon ordre pour reconstruire la phrase. Touche un mot déjà placé pour le retirer.<br>⚠️ Attention : dans chaque phrase, il y a <b>2 intrus</b> (mauvais temps, mauvais possessif…).</p>
+<div id="sentences"></div>
+</section>
+
+<section>
+<h2>🃏 Vocabulario – Etapa 1</h2>
+<p class="intro">Touche une carte pour la retourner et entendre le mot en espagnol. Pour choisir le <b>vocabulario obligatorio</b>, glisse la carte dans l'encadré (à la souris) ou touche le bouton <b>➕</b>.</p>
+<div class="tools"><button class="btn ter" id="unflip">↩ Retourner toutes les cartes</button></div>
+<div id="voc"></div>
+</section>
+
+<section>
+<h2>📝 Trace écrite</h2>
+<p class="intro">Choisis d'abord le vocabulaire et la grammaire obligatoires dans les encadrés, puis clique sur le bouton : la trace écrite (l'interview du journaliste et d'Unlogic Crew) les utilise.</p>
+<div class="tools"><button class="btn blue" id="trBtn" type="button">📝 Mostrar la trace écrite</button><button class="btn sec" id="trSpk" type="button" style="display:none">🔊 Leer</button></div>
+<div id="trBox" class="trbox" style="display:none"></div>
+</section>
+
+</main>
+
+<aside class="side">
+<div class="box vbox">
+<h3>⭐ Vocabulario obligatorio</h3>
+<div id="drop"><span class="empty">Glisse ici les cartes (ou touche ➕).</span></div>
+<p class="hint"><button class="btn ter" id="reset" type="button">↺ Vaciar</button></p>
+</div>
+<div class="box gbox">
+<h3>🧩 Gramática obligatoria</h3>
+<div id="gramList"></div>
+<p class="hint">Choisis combien de fois chaque point doit être utilisé.</p>
+</div>
+</aside>
+</div>
+
+<script>
+var VOC=[["Verbos", [["🧽", "effacer", "borrar"], ["🔁", "remplacer", "sustituir"], ["✅", "approuver / voter", "aprobar (ue) / votar"], ["🧍", "se rassembler", "concentrarse"], ["🛡️", "défendre", "defender (ie)"], ["🖤", "couvrir", "cubrir"], ["🛠️", "restaurer", "restaurar"], ["📢", "revendiquer", "reivindicar"], ["💡", "éveiller les consciences", "despertar (ie) conciencias"]]], ["Palabras útiles", [["🎨", "l'art urbain", "el arte urbano"], ["👥", "le collectif", "el colectivo"], ["🏘️", "le quartier / les voisins", "el barrio / los vecinos"], ["🏟️", "le gymnase", "el polideportivo"], ["🏛️", "la mairie", "el Ayuntamiento"], ["🪧", "le slogan", "el lema"], ["✊", "la pression populaire", "la presión popular"], ["🚫", "la censure", "la censura"], ["🗣️", "la liberté d'expression", "la libertad de expresión"], ["♀️", "féministe", "feminista"], ["🧴", "le vernis anti-graffiti", "el barniz antigrafiti"], ["⏳", "éphémère", "efímero/a"]]], ["Los pronombres posesivos", [["🙋", "le mien / la mienne", "el mío / la mía"], ["👥", "le nôtre / la nôtre", "el nuestro / la nuestra"], ["👤", "le sien / le leur", "el suyo / la suya"]]]];
+var GRAM=["el pretérito perfecto", "el imperfecto", "los posesivos"];
+var BUILD=[{"w": "Este año, algunos políticos han querido borrar nuestro mural.", "i": ["nuestra", "querían"], "fr": "Cette année, certains politiques ont voulu effacer notre fresque."}, {"w": "En 2018, los vecinos nos ayudaban a pintar el mural.", "i": ["han", "ayudan"], "fr": "En 2018, les voisins nous aidaient à peindre la fresque."}];
+/* Trace écrite : [[clé|mot]] = vocabulaire ; {{0|..}} perfecto, {{1|..}} imperfecto, {{2|..}} posesivos ; core=1 : phrase de base */
+var T=[[1, "@P Buenos días. Sois [[el colectivo|el colectivo]] Unlogic Crew. ¿Qué {{0|ha pasado}} con {{2|vuestro}} mural este año?"], [1, "@U Este año, algunos políticos {{0|han querido}} [[borrar|borrar]] {{2|nuestro}} mural y [[sustituir|sustituirlo]] por un mural deportivo."], [1, "@U En enero, Vox, el PP y Ciudadanos {{0|han [[aprobar (ue) / votar|aprobado]]}} esa decisión en la Junta del distrito."], [0, "@U Vox {{1|quería}} un mural deportivo; {{2|[[el nuestro / la nuestra|el nuestro]]}} [[reivindicar|reivindica]] la igualdad."], [1, "@P ¿Cómo {{1|era}} [[el barrio / los vecinos|el barrio]] cuando lo pintasteis, en 2018?"], [1, "@U {{1|Era}} un barrio tranquilo y [[el barrio / los vecinos|los vecinos]] nos {{1|ayudaban}} a pintar la pared del [[el polideportivo|polideportivo]] de La Concepción."], [1, "@U {{1|Queríamos}} representar a quince mujeres de todo el mundo, como Frida Kahlo o Rosa Parks: es [[el arte urbano|arte urbano]] [[feminista|feminista]]."], [1, "@P ¿Y cómo {{0|habéis [[defender (ie)|defendido]]}} {{2|vuestra}} obra?"], [0, "@U El 24 de enero, mujeres, hombres y niños {{0|se han [[concentrarse|concentrado]]}} delante del mural con [[el lema|el lema]] «El mural no se toca»."], [1, "@U Gracias a [[la presión popular|la presión popular]], [[el Ayuntamiento|el Ayuntamiento]] {{0|ha [[aprobar (ue) / votar|votado]]}} mantener el mural."], [0, "@U Para nosotros, borrarlo {{1|era}} [[la censura|censura]]: [[la libertad de expresión|la libertad de expresión]] es muy importante."], [1, "@P Pero el 8 de marzo, algunos grupos {{0|han [[cubrir|cubierto]]}} con pintura negra las caras de las mujeres…"], [1, "@U Sí, pero vamos a [[restaurar|restaurarlo]] y a protegerlo con [[el barniz antigrafiti|un barniz antigrafiti]]: este mural no va a ser [[efímero/a|efímero]]."], [0, "@P En {{2|mi}} barrio no hay murales. ¿Creéis que {{2|[[el mío / la mía|el mío]]}} también necesita uno?"], [0, "@U ¡Claro! Los vecinos de cada barrio tienen {{2|su}} historia, y {{2|[[el suyo / la suya|la suya]]}} también merece un mural."], [1, "@U Con {{2|nuestro}} arte, {{0|hemos querido}} [[despertar (ie) conciencias|despertar conciencias]]. Este mural es {{2|nuestro}}: ¡es un mural para todas!"]];
+
+/* ---------- Voix espagnole ---------- */
+var voices=[];
+function loadV(){ if('speechSynthesis' in window) voices=speechSynthesis.getVoices(); }
+loadV(); if('speechSynthesis' in window) speechSynthesis.onvoiceschanged=loadV;
+function pickVoice(){
+  var pref=["es-ES","es-MX","es-US","es-419","es"];
+  for(var p=0;p<pref.length;p++){ for(var k=0;k<voices.length;k++){ if(voices[k].lang && voices[k].lang.replace("_","-").indexOf(pref[p])===0) return voices[k]; } }
+  return null;
+}
+function say(t){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(t.replace("/a/os/as","").replace(/ \/ /g,", "));
+  u.lang="es-ES"; var v=pickVoice(); if(v){u.voice=v;u.lang=v.lang;} u.rate=.9; speechSynthesis.speak(u);
+}
+
+/* ---------- Vocabulario obligatorio ---------- */
+var chosen=[];
+var drop=document.getElementById("drop");
+function renderDrop(){
+  drop.innerHTML="";
+  if(!chosen.length){ drop.innerHTML='<span class="empty">Glisse ici les cartes (ou touche ➕).</span>'; }
+  chosen.forEach(function(es){
+    var c=document.createElement("span"); c.className="chip"; c.textContent=es;
+    var x=document.createElement("button"); x.textContent="×"; x.title="Retirer";
+    x.onclick=function(){ chosen=chosen.filter(function(e){return e!==es;}); renderDrop(); };
+    c.appendChild(x); drop.appendChild(c);
+  });
+  document.querySelectorAll(".card").forEach(function(cd){ cd.classList.toggle("chosen",chosen.indexOf(cd.dataset.es)>-1); });
+  refreshTrace();
+}
+function addWord(es){ if(chosen.indexOf(es)===-1){ chosen.push(es); renderDrop(); } }
+document.getElementById("reset").onclick=function(){ chosen=[]; renderDrop(); document.querySelectorAll("#gramList select").forEach(function(s){s.value=0;}); updGram(); };
+
+/* ---------- Flashcards (+ glisser à la souris) ---------- */
+var vocHost=document.getElementById("voc"), drag=null;
+function inDrop(x,y){ var r=drop.getBoundingClientRect(); return x>=r.left&&x<=r.right&&y>=r.top&&y<=r.bottom; }
+function mkCard(c){
+  var d=document.createElement("div"); d.className="card"; d.dataset.es=c[2];
+  d.innerHTML='<button class="add" title="Ajouter au vocabulario obligatorio">➕</button><div class="in"><div class="f"><span class="em">'+c[0]+'</span><span class="fr">'+c[1]+'</span></div><div class="b"><span>'+c[2]+'</span><small>🔊 '+c[1]+'</small></div></div>';
+  d.querySelector(".add").onclick=function(e){ e.stopPropagation(); addWord(c[2]); };
+  d.addEventListener("pointerdown",function(e){
+    if(e.pointerType!=="mouse"||e.target.classList.contains("add")) return;
+    drag={es:c[2],x:e.clientX,y:e.clientY,moved:false,g:null};
+  });
+  d.onclick=function(){
+    if(d.dataset.nodrag==="1"){ d.dataset.nodrag=""; return; }
+    d.classList.toggle("flip"); if(d.classList.contains("flip")) say(c[2]);
+  };
+  return d;
+}
+document.addEventListener("pointermove",function(e){
+  if(!drag) return;
+  if(!drag.moved && Math.abs(e.clientX-drag.x)+Math.abs(e.clientY-drag.y)>8){
+    drag.moved=true; drag.g=document.createElement("div"); drag.g.className="ghost"; drag.g.textContent=drag.es; document.body.appendChild(drag.g);
+  }
+  if(drag.moved){ drag.g.style.left=(e.clientX+10)+"px"; drag.g.style.top=(e.clientY+10)+"px"; drop.classList.toggle("over",inDrop(e.clientX,e.clientY)); e.preventDefault(); }
+});
+document.addEventListener("pointerup",function(e){
+  if(!drag) return;
+  if(drag.moved){
+    if(inDrop(e.clientX,e.clientY)) addWord(drag.es);
+    drag.g.remove(); drop.classList.remove("over");
+    var cd=document.querySelector('.card[data-es="'+drag.es+'"]'); if(cd) cd.dataset.nodrag="1";
+    setTimeout(function(){ if(cd) cd.dataset.nodrag=""; },300);
+  }
+  drag=null;
+});
+VOC.forEach(function(g){
+  var h=document.createElement("div"); h.className="vcat"; h.textContent=g[0]; vocHost.appendChild(h);
+  var cs=document.createElement("div"); cs.className="cards"; g[1].forEach(function(c){cs.appendChild(mkCard(c));}); vocHost.appendChild(cs);
+});
+document.getElementById("unflip").onclick=function(){document.querySelectorAll(".card.flip").forEach(function(c){c.classList.remove("flip");});};
+
+/* ---------- Gramática obligatoria ---------- */
+var gl=document.getElementById("gramList");
+GRAM.forEach(function(g){
+  var d=document.createElement("div"); d.className="gitem zero";
+  var o='<option value="0">—</option>'; for(var n=1;n<=5;n++) o+='<option value="'+n+'">'+n+' ×</option>';
+  d.innerHTML='<span class="lbl">'+g+'</span><select title="Nombre d\'utilisations">'+o+'</select>';
+  d.querySelector("select").onchange=updGram; gl.appendChild(d);
+});
+function updGram(){ gl.querySelectorAll(".gitem").forEach(function(d){ d.classList.toggle("zero",+d.querySelector("select").value===0); }); refreshTrace(); }
+
+/* ---------- Ordena la frase ---------- */
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=a[i];a[i]=a[j];a[j]=x;}return a;}
+var host=document.getElementById("sentences");
+BUILD.forEach(function(d,n){
+  d.words=d.w.split(" ");
+  var s=document.createElement("div"); s.className="sent";
+  s.innerHTML='<div class="top"><span class="num">Frase '+(n+1)+'</span><span class="tools"><button class="btn sec b-p">💡 Pista</button><button class="btn b-s">✔ Solución</button><button class="btn ter b-r">↺ Recomenzar</button></span></div>'+
+    '<div class="pista">🇫🇷 '+d.fr+'</div><div class="slots"></div><div class="bank"></div><div class="bravo">✅ ¡Muy bien!</div>';
+  host.appendChild(s);
+  var slots=s.querySelector(".slots"), bank=s.querySelector(".bank");
+  function mkW(t){
+    var w=document.createElement("span"); w.className="w"; w.textContent=t;
+    w.onclick=function(){
+      if(s.classList.contains("ok")) return;
+      if(w.parentNode.classList.contains("slot")){ w.parentNode.classList.remove("full"); bank.appendChild(w); }
+      else { var e=slots.querySelector(".slot:not(.full)"); if(!e) return; e.appendChild(w); e.classList.add("full"); }
+      check();
+    };
+    return w;
+  }
+  function fill(){
+    slots.innerHTML=""; bank.innerHTML=""; s.classList.remove("ok");
+    d.words.forEach(function(){var x=document.createElement("span"); x.className="slot"; slots.appendChild(x);});
+    var order=shuffle(d.words.concat(d.i));
+    while(order.slice(0,d.words.length).join(" ")===d.w) order=shuffle(order);
+    order.forEach(function(t){bank.appendChild(mkW(t));});
+  }
+  function check(){
+    var sl=slots.querySelectorAll(".slot"), full=true, ok=true;
+    sl.forEach(function(x,k){ var w=x.querySelector(".w"); if(!w){full=false;ok=false;return;} w.classList.remove("bad"); if(w.textContent!==d.words[k]) ok=false; });
+    s.classList.toggle("ok",ok);
+    if(full&&!ok) sl.forEach(function(x,k){ var w=x.querySelector(".w"); if(w.textContent!==d.words[k]) w.classList.add("bad"); });
+  }
+  s.querySelector(".b-p").onclick=function(){s.classList.toggle("show");};
+  s.querySelector(".b-r").onclick=fill;
+  s.querySelector(".b-s").onclick=function(){
+    fill(); var bw=Array.prototype.slice.call(bank.querySelectorAll(".w"));
+    slots.querySelectorAll(".slot").forEach(function(x,k){ var w=bw.filter(function(b){return b.textContent===d.words[k]&&b.parentNode===bank;})[0]; x.appendChild(w); x.classList.add("full"); });
+    check();
+  };
+  fill();
+});
+
+/* ---------- Trace écrite ---------- */
+var LIB=T.map(function(x,i){
+  var g=[0,1,2].map(function(k){ return (x[1].match(new RegExp("\\{\\{"+k+"\\|","g"))||[]).length; });
+  var v=[], re=/\[\[([^|\]]+)\|/g, m; while((m=re.exec(x[1]))) if(v.indexOf(m[1])===-1) v.push(m[1]);
+  return {o:i,core:x[0],t:x[1],v:v,g:g};
+});
+var box=document.getElementById("trBox"), btn=document.getElementById("trBtn"), spk=document.getElementById("trSpk");
+function selGram(){ return Array.prototype.map.call(gl.querySelectorAll("select"),function(s){return +s.value;}); }
+function fmt(t,V,G){
+  t=t.replace(/\[\[([^|\]]+)\|([^\]]+)\]\]/g,function(m,k,w){ return V.indexOf(k)>-1?'<span class="tv">'+w+'</span>':w; });
+  return t.replace(/\{\{(\d)\|([^}]+)\}\}/g,function(m,k,w){ return G[+k]>0?'<span class="tg'+k+'">'+w+'</span>':w; });
+}
+function strip(t){ return t.replace(/\[\[[^|\]]+\|([^\]]+)\]\]/g,"$1").replace(/\{\{\d\|([^}]+)\}\}/g,"$1"); }
+function build(){
+  var V=chosen.slice(), G=selGram();
+  var pick={}; LIB.forEach(function(x){ if(x.core) pick[x.o]=1; });
+  V.forEach(function(w){ var has=LIB.some(function(x){return pick[x.o]&&x.v.indexOf(w)>-1;}); if(!has){ var c=LIB.filter(function(x){return x.v.indexOf(w)>-1;})[0]; if(c) pick[c.o]=1; } });
+  function count(k){ return LIB.reduce(function(a,x){return a+(pick[x.o]?x.g[k]:0);},0); }
+  G.forEach(function(n,k){ for(var i=0;i<LIB.length&&count(k)<n;i++){ if(!pick[i]&&LIB[i].g[k]>0) pick[i]=1; } });
+  if(pick[13]||pick[14]){pick[13]=1;pick[14]=1;}
+  var sents=LIB.filter(function(x){return pick[x.o];});
+  var leg='<div class="legend">'+(V.length?'<span class="tv">vocabulario obligatorio</span>':'')+G.map(function(n,k){return n>0?'<span class="tg'+k+'">'+GRAM[k]+'</span>':'';}).join('')+'</div>';
+  var chk;
+  if(!V.length && !G.some(function(n){return n>0;})) chk='<p class="check">ℹ️ Aucun vocabulaire ni grammaire obligatoire choisi : voici la trace écrite de base.</p>';
+  else chk='<ul class="check">'+V.map(function(w){ var ok=sents.some(function(x){return x.v.indexOf(w)>-1;}); return '<li>'+(ok?'✅':'⚠️')+' '+w+'</li>'; }).join('')+
+    G.map(function(n,k){ return n>0?'<li>'+(count(k)>=n?'✅':'⚠️')+' '+GRAM[k]+' : '+count(k)+' / '+n+'</li>':''; }).join('')+'</ul>';
+  box.innerHTML='<h3>🎙️ Entrevista a Unlogic Crew (marzo de 2021)</h3>'+leg+(function(){var h='',last='';sents.forEach(function(x){var sp=x.t.slice(1,2),t=fmt(x.t.slice(3),V,G);if(sp!==last){h+=(last?'</p>':'')+'<p class="rp">—<b>'+(sp==='P'?'Periodista':'Unlogic Crew')+'</b>: '+t;last=sp;}else h+=' '+t;});return '<div class="tx">'+h+'</p></div>';})()+chk;
+  box.dataset.plain=sents.map(function(x){return strip(x.t.slice(3));}).join(' ');
+}
+function refreshTrace(){ if(box.style.display!=="none") build(); }
+btn.onclick=function(){
+  if(box.style.display==="none"){ build(); box.style.display="block"; spk.style.display=""; btn.textContent="🙈 Ocultar la trace écrite"; }
+  else { box.style.display="none"; spk.style.display="none"; btn.textContent="📝 Mostrar la trace écrite"; if(window.speechSynthesis) speechSynthesis.cancel(); }
+};
+spk.onclick=function(){ if(!('speechSynthesis' in window)) return; speechSynthesis.cancel(); var u=new SpeechSynthesisUtterance(box.dataset.plain.replace(/[«»]/g,"")); u.lang="es-ES"; var v=pickVoice(); if(v){u.voice=v;u.lang=v.lang;} u.rate=.9; speechSynthesis.speak(u); };
+document.querySelectorAll('.tl .dt').forEach(function(d){ d.onclick=function(){ document.querySelectorAll('.tl .dt.speaking').forEach(function(x){x.classList.remove('speaking');}); d.classList.add('speaking'); say(d.textContent); }; });
+renderDrop(); updGram();
+</script>
+</body>
+</html>
